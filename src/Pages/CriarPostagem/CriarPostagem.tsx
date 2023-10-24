@@ -41,7 +41,7 @@ export const CriarPostagem = () => {
 
         <section className='flex items-center min-h-screen bg-violet-200 justify-center	'>
             <div className='flex items-center w-4/12 justify-self-center max-auto '>
-                <div className='flex-1 h-full max-w-full  max-auto bg-[#AF54EB] rounded-lg shadow-xl'>
+                <div className='flex-1 h-full max-w-full  max-auto bg-[#9D95FF] rounded-lg shadow-xl'>
                     <div className='flex flex-col md:flex-row '>
                         <div className='flex items-center justify-center p-6 w-max sm:p-12  grow '>
                             <form action='' onSubmit={handleSubmit} className='flex flex-col'>

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../Components/Input/Input';
 import Button from '../../Components/Button/Button';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 
 
@@ -22,8 +24,10 @@ export const CadastroUsuario = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (senha !== confirmaSenha) {
-            setHasError(true)
-            setMensagemErro("Senha e Confimação de senha não se coicidem");
+            // setHasError(true)
+            // setMensagemErro("Senha e Confimação de senha não se coicidem");
+            toast.error('Senham não coicidem')
+
             return;
         } else {
             axios
@@ -35,7 +39,10 @@ export const CadastroUsuario = () => {
                 })
                 .then((response) => {
                     //setMensagemErro(true);
+                    toast.success('Usuario Cadastrado')
                     navigate('/login');
+                }).catch((error) => {
+                    toast.error('Erro ao cadastrar')
                 });
         }
 
@@ -47,13 +54,12 @@ export const CadastroUsuario = () => {
     };
 
     return (
-
         <section className='flex items-center min-h-screen bg-violet-200 justify-center	'>
-            <div className='flex items-center w-3/11.5 justify-self-center max-auto '>
-                <div className='flex-1 h-full max-w-full  max-auto bg-[#AF54EB] rounded-lg shadow-xl'>
+            <div className='flex items-center w-3/12 justify-self-center max-auto '>
+                <div className='flex-1 h-full max-w-full  max-auto bg-[#9D95FF] rounded-lg shadow-xl'>
                     <div className='flex flex-col md:flex-row '>
-                        <div className='flex items-center justify-center p-6 sm:p-12'>
-                            <form action='' onSubmit={handleSubmit} className='flex flex-col pl-2'>
+                        <div className='flex items-center justify-center p-6 w-max sm:p-12  grow '>
+                            <form action='' onSubmit={handleSubmit} className='flex flex-col'>
                                 <h1 className="mb-4 text-5xl font-bold text-center text-black font-roboto">
                                     Cadastro
                                 </h1>
