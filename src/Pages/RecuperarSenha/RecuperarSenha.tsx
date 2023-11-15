@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Box, Container, Paper, TextField, Typography, Button, Link } from '@mui/material';
+import { Box, Container, Paper, TextField, Typography, Button } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -10,37 +9,36 @@ import { z } from 'zod';
 
 
 
-export const LoginUsuario = () => {
-
-    const navigate = useNavigate();
+export const RecuperarSenha = () => {
 
 
-    const LoginUserFormSchema = z.object({
-        email: z.string(),
-        password: z.string()
+    const ForgotPassowrdUserFormSchema = z.object({
+        email: z.string().nonempty('campo obrigatorio')
+            .email('Formato de email inválido'),
 
     })
-    type LoginFormData = z.infer<typeof LoginUserFormSchema>
+    type RecuperarSenhaFormData = z.infer<typeof ForgotPassowrdUserFormSchema>
 
-    const { register, handleSubmit } = useForm<LoginFormData>({
-        resolver: zodResolver(LoginUserFormSchema)
+    const { register, handleSubmit, formState: { errors } } = useForm<RecuperarSenhaFormData>({
+        resolver: zodResolver(ForgotPassowrdUserFormSchema)
     });
 
 
-    const loginUser = (data: LoginFormData) => {
+    const recuperaSenha = (data: RecuperarSenhaFormData) => {
         axios
-            .post('http://localhost:8000/usuarios/login', {
+            .post('http://localhost:8000/usuarios/esqueci-senha', {
                 email: data.email,
-                senha: data.password,
             })
             .then((response) => {
                 //setMensagemErro(true);
-                navigate('/');
+                toast.success('Email Enviado')
             }).catch((error) => {
-                toast.error('email ou senha incorretos')
+                toast.error('Email não encontrado')
             });
 
     }
+
+
 
     return (
 
@@ -50,16 +48,17 @@ export const LoginUsuario = () => {
             <Box
                 margin={6}
                 maxWidth={800}
-                height={550}
+                height={400}
                 maxHeight={900}
                 //sx={{ backgroundColor: "#BA5AFA" }}
                 display={'flex'}
-                gap={1}
+                gap={3}
                 flexDirection={'column'}
                 alignItems={'center'}
                 justifyContent={'center'}
                 borderRadius={'15px'}
                 component={Paper}
+                marginTop={10}
                 boxShadow={2}
             >
                 <Box
@@ -68,35 +67,22 @@ export const LoginUsuario = () => {
                     gap={3}
                     width={400}
                     component='form'
-                    onSubmit={handleSubmit(loginUser)}
+                    onSubmit={handleSubmit(recuperaSenha)}
                 >
 
                     <Typography
                         variant="h4"
                         align="center"
                     >
-                        Login
+                        Recuperar Senha
                     </Typography>
 
                     <TextField
                         label="Email"
+                        margin='dense'
                         {...register('email')}
 
                     />
-
-                    <TextField
-                        label="Senha"
-                        {...register('password')}
-
-                    />
-                    <Box
-                        display={'flex'}
-                        justifyContent={'end'}
-                    >
-                        <Link href='/recuperarSenha'>
-                            Esqueceu a Senha?
-                        </Link>
-                    </Box>
 
                     <Box width={'100%'} display={'flex'} justifyContent={'center'} marginTop={2}>
                         <Box>
@@ -105,7 +91,7 @@ export const LoginUsuario = () => {
                                 color="primary"
                                 size='large'
                                 type='submit'
-                            >Login</Button>
+                            >Enviar</Button>
                         </Box>
                     </Box>
                 </Box>

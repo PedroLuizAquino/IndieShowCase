@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Box, Container, Paper, TextField, Typography, Button, Link } from '@mui/material';
+import { Box, Container, Paper, TextField, Typography, Button } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -10,34 +9,31 @@ import { z } from 'zod';
 
 
 
-export const LoginUsuario = () => {
-
-    const navigate = useNavigate();
+export const AlterarSenha = () => {
 
 
-    const LoginUserFormSchema = z.object({
-        email: z.string(),
-        password: z.string()
+    const ForgotPassowrdUserFormSchema = z.object({
+        password: z.string().nonempty('campo obrigatorio')
+            .min(8, 'A senha prescisa de no mínimo 8 caracteres'),
+        confirmPassword: z.string().nonempty('campo obrigatorio')
 
     })
-    type LoginFormData = z.infer<typeof LoginUserFormSchema>
+    type RecuperarSenhaFormData = z.infer<typeof ForgotPassowrdUserFormSchema>
 
-    const { register, handleSubmit } = useForm<LoginFormData>({
-        resolver: zodResolver(LoginUserFormSchema)
+    const { register, handleSubmit, formState: { errors } } = useForm<RecuperarSenhaFormData>({
+        resolver: zodResolver(ForgotPassowrdUserFormSchema)
     });
 
 
-    const loginUser = (data: LoginFormData) => {
+    const recuperaSenha = (data: RecuperarSenhaFormData) => {
         axios
-            .post('http://localhost:8000/usuarios/login', {
-                email: data.email,
+            .post('http://localhost:8000/usuarios/nova-senha', {
                 senha: data.password,
             })
             .then((response) => {
-                //setMensagemErro(true);
-                navigate('/');
+                toast.success('Senha alterada com sucesso')
             }).catch((error) => {
-                toast.error('email ou senha incorretos')
+                toast.error('Senha não pode ser identica a atual')
             });
 
     }
@@ -68,36 +64,26 @@ export const LoginUsuario = () => {
                     gap={3}
                     width={400}
                     component='form'
-                    onSubmit={handleSubmit(loginUser)}
+                    onSubmit={handleSubmit(recuperaSenha)}
                 >
 
                     <Typography
                         variant="h4"
                         align="center"
                     >
-                        Login
+                        Alterar Senha
                     </Typography>
 
                     <TextField
                         label="Email"
-                        {...register('email')}
-
-                    />
-
-                    <TextField
-                        label="Senha"
                         {...register('password')}
 
                     />
-                    <Box
-                        display={'flex'}
-                        justifyContent={'end'}
-                    >
-                        <Link href='/recuperarSenha'>
-                            Esqueceu a Senha?
-                        </Link>
-                    </Box>
+                    <TextField
+                        label="Email"
+                        {...register('confirmPassword')}
 
+                    />
                     <Box width={'100%'} display={'flex'} justifyContent={'center'} marginTop={2}>
                         <Box>
                             <Button
@@ -105,7 +91,7 @@ export const LoginUsuario = () => {
                                 color="primary"
                                 size='large'
                                 type='submit'
-                            >Login</Button>
+                            >Alterar</Button>
                         </Box>
                     </Box>
                 </Box>

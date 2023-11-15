@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, Container, Grid, Input, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -57,7 +57,7 @@ export const CadastroUsuario = () => {
                 maxWidth={800}
                 height={550}
                 maxHeight={900}
-                //sx={{ backgroundColor: "#BA5AFA" }}
+                sx={{ backgroundColor: "#2E336B" }}
                 display={'flex'}
                 gap={1}
                 flexDirection={'column'}
@@ -79,6 +79,7 @@ export const CadastroUsuario = () => {
                     <Typography
                         variant="h4"
                         align="center"
+                        color={'white'}
                     >
                         Cadastro
                     </Typography>
@@ -89,6 +90,7 @@ export const CadastroUsuario = () => {
                         {...register('name')}
                         helperText={errors.name?.message}
                         error={!!errors.name?.message}
+
                     />
 
                     <TextField
