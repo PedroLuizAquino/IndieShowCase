@@ -1,126 +1,130 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Input from '../../Components/Input/Input';
-import Button from '../../Components/Button/Button';
+import { Box, Button, Card, CardActions, CardContent, Container, Grid, Input, Paper, TextField, Typography } from '@mui/material';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 export const CadastroUsuario = () => {
 
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const [confirmaSenha, setConfirmaSenha] = useState('');
-    const [foto, setFoto] = useState('');
-    const [mensagemErro, setMensagemErro] = useState('');
-    const [hasError, setHasError] = useState<Boolean>();
-
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        if (senha !== confirmaSenha) {
-            // setHasError(true)
-            // setMensagemErro("Senha e Confimação de senha não se coicidem");
-            toast.error('Senham não coicidem')
+    const createUserFormSchema = z.object({
+        name: z.string().nonempty('campo obrigatorio'),
+        email: z.string().nonempty('campo obrigatorio')
+            .email('Formato de email inválido'),
+        password: z.string().nonempty('campo obrigatorio')
+            .min(8, 'A senha prescisa de no mínimo 8 caracteres'),
+        confirmPassword: z.string().nonempty('campo obrigatorio')
+    })
+        .refine((fields) => fields.password === fields.confirmPassword, {
+            path: ['confirmPassword'],
+            message: 'As Senhas prescisam ser iguais'
+        })
 
-            return;
-        } else {
-            axios
-                .post('http://localhost:8000/usuarios/cadastro', {
-                    nome: nome,
-                    email: email,
-                    senha: senha,
-                    //foto: usu_foto
-                })
-                .then((response) => {
-                    //setMensagemErro(true);
-                    toast.success('Usuario Cadastrado')
-                    navigate('/login');
-                }).catch((error) => {
-                    toast.error('Erro ao cadastrar')
-                });
-        }
+    type createUserFormData = z.infer<typeof createUserFormSchema>
 
-        console.log('submit', {
-            nome,
-            email,
-            senha,
-        });
-    };
+    const { register, handleSubmit, formState: { errors } } = useForm<createUserFormData>({
+        resolver: zodResolver(createUserFormSchema)
+    });
+
+
+    const createUser = (data: createUserFormData) => {
+        axios
+            .post('http://localhost:8000/usuarios/cadastro', {
+                nome: data.name,
+                email: data.email,
+                senha: data.password,
+            })
+            .then((response) => {
+                //setMensagemErro(true);
+                toast.success('Usuario Cadastrado')
+                navigate('/login');
+            }).catch((error) => {
+                toast.error('falha ao cadastrar')
+            });
+
+    }
+
 
     return (
-        <section className='flex items-center min-h-screen bg-violet-200 justify-center	'>
-            <div className='flex items-center w-3/12 justify-self-center max-auto '>
-                <div className='flex-1 h-full max-w-full  max-auto bg-[#9D95FF] rounded-lg shadow-xl'>
-                    <div className='flex flex-col md:flex-row '>
-                        <div className='flex items-center justify-center p-6 w-max sm:p-12  grow '>
-                            <form action='' onSubmit={handleSubmit} className='flex flex-col'>
-                                <h1 className="mb-4 text-5xl font-bold text-center text-black font-roboto">
-                                    Cadastro
-                                </h1>
+        <Container
+            maxWidth={'md'}
+        >
+            <Box
+                margin={6}
+                maxWidth={800}
+                height={550}
+                maxHeight={900}
+                //sx={{ backgroundColor: "#BA5AFA" }}
+                display={'flex'}
+                gap={1}
+                flexDirection={'column'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                borderRadius={'15px'}
+                component={Paper}
+                boxShadow={2}
+            >
+                <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    gap={3}
+                    width={400}
+                    component='form'
+                    onSubmit={handleSubmit(createUser)}
+                >
 
-                                <div className='mt-12'>
-                                    <Input
-                                        labelTexto="Nome de Usuario"
-                                        placeholder="Nome de Usuario"
-                                        tipo="text"
-                                        nome="nome"
-                                        onChange={(e) => {
-                                            setNome(e.target.value);
-                                        }}
-                                    />
-                                </div>
+                    <Typography
+                        variant="h4"
+                        align="center"
+                    >
+                        Cadastro
+                    </Typography>
 
-                                <div className='mt-4'>
-                                    <Input
-                                        labelTexto="Email"
-                                        placeholder="Insira o seu email"
-                                        tipo="email"
-                                        nome="email"
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
-                                    />
-                                </div>
 
-                                <div className='mt-4'>
-                                    <Input
-                                        labelTexto="Senha"
-                                        placeholder="Insira sua senha"
-                                        tipo="password"
-                                        nome="senha"
-                                        onChange={(e) => {
-                                            setSenha(e.target.value);
-                                        }}
-                                    />
-                                </div>
+                    <TextField
+                        label="Nome"
+                        {...register('name')}
+                        helperText={errors.name?.message}
+                        error={!!errors.name?.message}
+                    />
 
-                                <div className='mt-4'>
-                                    <Input
-                                        labelTexto="Confirmação de senha"
-                                        placeholder="Confirmação de senha"
-                                        tipo="password"
-                                        nome="confirmaSenha"
-                                        onChange={(e) => {
-                                            setConfirmaSenha(e.target.value);
-                                        }}
-                                    />
-                                </div>
-                                {/* Mensagens de Erros proximos */}
-                                <div className="flex justify-center mt-8    ">
-                                    <Button texto="Cadastrar" tipo="submit" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <TextField
+                        label="Email"
+                        type='email'
+                        {...register('email')}
+                        helperText={errors.email?.message}
+                        error={!!errors.email?.message}
+                    />
+
+                    <TextField
+                        label="Senha"
+                        type='password'
+                        {...register('password')}
+                        helperText={errors.password?.message}
+                        error={!!errors.password?.message}
+                    />
+                    <TextField
+                        label="Confirmação de senha"
+                        type='password'
+                        {...register('confirmPassword')}
+                        helperText={errors.confirmPassword?.message}
+                        error={!!errors.confirmPassword?.message}
+                    />
+                    <Box width={'100%'} display={'flex'} justifyContent={'center'} marginTop={2}>
+                        <Box>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                size='large'
+                                type='submit'
+                            >Cadastrar</Button>
+                        </Box>
+                    </Box>
+                </Box>
+            </Box>
+        </Container >
     )
-
 }
