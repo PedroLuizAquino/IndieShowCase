@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo2.png'
-import { useState } from 'react';
 
 
 const categorias = [
@@ -39,9 +38,6 @@ const categorias = [
 export const Navbar = () => {
     const navigate = useNavigate();
 
-    const [value, setValue] = useState();
-
-    console.log(value)
     return (
         <Box sx={{ flexGrow: 1 }} bgcolor={"#9B4BD0"}>
             <AppBar position="static" color='transparent'>
