@@ -5,3 +5,7 @@
 @fontsource/roboto/400.css;
 @fontsource/roboto/500.css;
 @fontsource/roboto/700.css;
+
+body{
+    background-color: #626CE3;
+}

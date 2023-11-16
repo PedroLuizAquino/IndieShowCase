@@ -1,14 +1,17 @@
-import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, Typography } from '@mui/material';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { StyledTextField } from '../../Themes';
 
 export const CadastroUsuario = () => {
 
     const navigate = useNavigate();
+
+
 
     const createUserFormSchema = z.object({
         name: z.string().nonempty('campo obrigatorio'),
@@ -57,7 +60,6 @@ export const CadastroUsuario = () => {
                 maxWidth={800}
                 height={550}
                 maxHeight={900}
-                sx={{ backgroundColor: "#2E336B" }}
                 display={'flex'}
                 gap={1}
                 flexDirection={'column'}
@@ -85,15 +87,15 @@ export const CadastroUsuario = () => {
                     </Typography>
 
 
-                    <TextField
+                    <StyledTextField
                         label="Nome"
                         {...register('name')}
                         helperText={errors.name?.message}
+                        variant='outlined'
                         error={!!errors.name?.message}
-
                     />
 
-                    <TextField
+                    <StyledTextField
                         label="Email"
                         type='email'
                         {...register('email')}
@@ -101,14 +103,14 @@ export const CadastroUsuario = () => {
                         error={!!errors.email?.message}
                     />
 
-                    <TextField
+                    <StyledTextField
                         label="Senha"
                         type='password'
                         {...register('password')}
                         helperText={errors.password?.message}
                         error={!!errors.password?.message}
                     />
-                    <TextField
+                    <StyledTextField
                         label="Confirmação de senha"
                         type='password'
                         {...register('confirmPassword')}

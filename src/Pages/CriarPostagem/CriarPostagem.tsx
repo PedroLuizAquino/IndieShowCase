@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Container, Grid, Paper, TextField, Typography, Button, Select } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography, Button, Select } from '@mui/material';
 import { ICategorias } from '../../Interface';
+import { StyledTextField } from '../../Themes';
 
 
 
@@ -60,16 +61,16 @@ export const CriarPostagem = () => {
                             padding={5}
                             gap={5}
                         >
-                            <TextField
+                            <StyledTextField
                                 label={'Titulo'}
                             />
-                            <TextField
+                            <StyledTextField
                                 label={'Categoria'}
                             />
                             <Select
                                 value={categorias}
                             />
-                            <TextField
+                            <StyledTextField
                                 label={'Tags'}
                             />
                         </Box>
@@ -83,7 +84,7 @@ export const CriarPostagem = () => {
                             padding={5}
                             gap={5}
                         >
-                            <TextField
+                            <StyledTextField
                                 multiline
                                 label={'Descrição'}
                                 maxRows={6}

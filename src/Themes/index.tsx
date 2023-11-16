@@ -1,4 +1,5 @@
-import { createTheme } from "@mui/material"
+import { TextField, createTheme, makeStyles } from "@mui/material"
+import styled from "styled-components";
 
 
 export const DefaultTheme = createTheme({
@@ -17,7 +18,19 @@ export const DefaultTheme = createTheme({
         },
         background: {
             default: "#E6E6E6",
-            paper: "#FFFFFF",
+            paper: "#2E336B",
+        },
+        text: {
+            primary: "#C5C5C9",
+            secondary: "#C5C5C5",
+            disabled: "#C5C5C9",
         }
+
+    },
+});
+
+export const StyledTextField = styled(TextField)({
+    "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#C5C5C5",
     }
 });

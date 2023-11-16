@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Box, Container, Paper, TextField, Typography, Button } from '@mui/material';
+import { Box, Container, Paper, Typography, Button } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { StyledTextField } from '../../Themes';
 
 
 
@@ -73,11 +74,12 @@ export const RecuperarSenha = () => {
                     <Typography
                         variant="h4"
                         align="center"
+                        color={'white'}
                     >
                         Recuperar Senha
                     </Typography>
 
-                    <TextField
+                    <StyledTextField
                         label="Email"
                         margin='dense'
                         {...register('email')}
