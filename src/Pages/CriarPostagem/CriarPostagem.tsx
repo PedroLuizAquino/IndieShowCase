@@ -16,6 +16,7 @@ export const CriarPostagem = () => {
     const [categorias, setCategorias] = useState<ICategorias[]>()
 
 
+
     useEffect(() => {
         axios
             .get('http://localhost:3001/categorias/')
@@ -70,9 +71,9 @@ export const CriarPostagem = () => {
                             <TextField
                                 label={'Categoria'}
                             />
-                            <Select
+                            {/* <Select
                                 value={categorias}
-                            />
+                            /> */}
                             <TextField
                                 label={'Tags'}
                             />
@@ -102,10 +103,20 @@ export const CriarPostagem = () => {
                             justifyContent={'center'}
                             gap={2}
                         >
-                            <Button>
+                            <Button
+                                variant='text'
+                                color='pedro'
+                                size='large'
+                                onClick={() => navigate('/')}
+                            >
                                 Descartar
                             </Button>
-                            <Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                size='large'
+                                type='submit'
+                            >
                                 Publicar
                             </Button>
                         </Box>
