@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Box, Container, Paper, Typography, Button, Link } from '@mui/material';
+import { Box, Container, Paper, Typography, Button, Link, TextField } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -80,13 +80,13 @@ export const LoginUsuario = () => {
                         Login
                     </Typography>
 
-                    <StyledTextField
+                    <TextField
                         label="Email"
                         {...register('email')}
 
                     />
 
-                    <StyledTextField
+                    <TextField
                         label="Senha"
                         {...register('password')}
 
@@ -95,7 +95,7 @@ export const LoginUsuario = () => {
                         display={'flex'}
                         justifyContent={'end'}
                     >
-                        <Link href='/recuperarSenha'>
+                        <Link href='/recuperarSenha' color={'#fff'}>
                             Esqueceu a Senha?
                         </Link>
                     </Box>
@@ -104,7 +104,7 @@ export const LoginUsuario = () => {
                         <Box>
                             <Button
                                 variant="contained"
-                                color="primary"
+                                color="secondary"
                                 size='large'
                                 type='submit'
                             >Login</Button>

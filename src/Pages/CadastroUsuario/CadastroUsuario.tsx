@@ -1,4 +1,4 @@
-import { Box, Button, Container, Paper, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -87,7 +87,7 @@ export const CadastroUsuario = () => {
                     </Typography>
 
 
-                    <StyledTextField
+                    <TextField
                         label="Nome"
                         {...register('name')}
                         helperText={errors.name?.message}
@@ -95,7 +95,7 @@ export const CadastroUsuario = () => {
                         error={!!errors.name?.message}
                     />
 
-                    <StyledTextField
+                    <TextField
                         label="Email"
                         type='email'
                         {...register('email')}
@@ -103,14 +103,14 @@ export const CadastroUsuario = () => {
                         error={!!errors.email?.message}
                     />
 
-                    <StyledTextField
+                    <TextField
                         label="Senha"
                         type='password'
                         {...register('password')}
                         helperText={errors.password?.message}
                         error={!!errors.password?.message}
                     />
-                    <StyledTextField
+                    <TextField
                         label="Confirmação de senha"
                         type='password'
                         {...register('confirmPassword')}
@@ -121,7 +121,7 @@ export const CadastroUsuario = () => {
                         <Box>
                             <Button
                                 variant="contained"
-                                color="primary"
+                                color="secondary"
                                 size='large'
                                 type='submit'
                             >Cadastrar</Button>

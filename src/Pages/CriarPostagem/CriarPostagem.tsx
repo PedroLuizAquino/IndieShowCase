@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Container, Grid, Paper, Typography, Button, Select } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography, Button, Select, TextField } from '@mui/material';
 import { ICategorias } from '../../Interface';
 import { StyledTextField } from '../../Themes';
+import { toast } from 'react-toastify';
 
 
 
@@ -21,6 +22,8 @@ export const CriarPostagem = () => {
             .then((response) => {
                 console.log(response)
                 setCategorias(response.data);
+            }).catch((error) => {
+                toast.error('falha ao cadastrar')
             });
     }, []);
 
@@ -50,7 +53,7 @@ export const CriarPostagem = () => {
 
                 <Grid container>
                     <Grid item xs={6}>
-                        <Typography variant='h4'>
+                        <Typography variant='h4' color={'white'}>
                             Criar Postagem
                         </Typography>
                         <Box
@@ -61,16 +64,16 @@ export const CriarPostagem = () => {
                             padding={5}
                             gap={5}
                         >
-                            <StyledTextField
+                            <TextField
                                 label={'Titulo'}
                             />
-                            <StyledTextField
+                            <TextField
                                 label={'Categoria'}
                             />
                             <Select
                                 value={categorias}
                             />
-                            <StyledTextField
+                            <TextField
                                 label={'Tags'}
                             />
                         </Box>

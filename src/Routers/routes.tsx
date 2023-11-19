@@ -20,7 +20,7 @@ export default function AppRouter() {
         <Router>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<></>} />
+                    <Route index element={<CadastroUsuario />} />
 
                     <Route path='/criarPostagem' element={<CriarPostagem />} />
 
