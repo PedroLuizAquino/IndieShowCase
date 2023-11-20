@@ -1,5 +1,5 @@
 
 export interface ICategorias {
-    identify: number;
-    name: string;
+    cat_id: number;
+    cat_nome: string;
 }

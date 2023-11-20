@@ -24,6 +24,13 @@ declare module '@mui/material/IconButton' {
     }
 }
 
+declare module '@mui/material/TextField' {
+    interface TextFieldPropsColorOverrides {
+        pedro: true;
+    }
+}
+
+
 export const DefaultTheme = createTheme({
     palette: {
         primary: {

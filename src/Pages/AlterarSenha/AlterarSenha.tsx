@@ -75,12 +75,12 @@ export const AlterarSenha = () => {
                     </Typography>
 
                     <TextField
-                        label="Email"
+                        label="Senha"
                         {...register('password')}
 
                     />
                     <TextField
-                        label="Email"
+                        label="Senha"
                         {...register('confirmPassword')}
 
                     />

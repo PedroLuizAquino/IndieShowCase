@@ -34,6 +34,10 @@ export const CadastroUsuario = () => {
 
 
     const createUser = (data: createUserFormData) => {
+        console.log(data.name)
+        console.log(data.email)
+        console.log(data.password)
+
         axios
             .post('http://localhost:8000/usuarios/cadastro', {
                 nome: data.name,
@@ -45,7 +49,7 @@ export const CadastroUsuario = () => {
                 toast.success('Usuario Cadastrado')
                 navigate('/login');
             }).catch((error) => {
-                toast.error('falha ao cadastrar')
+                toast.error(error.message)
             });
 
     }
@@ -99,6 +103,7 @@ export const CadastroUsuario = () => {
                         label="Email"
                         type='email'
                         {...register('email')}
+                        color='pedro'
                         helperText={errors.email?.message}
                         error={!!errors.email?.message}
                     />
