@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Container, Grid, Paper, Typography, Button, Select, TextField } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography, Button, Select, TextField, OutlinedInput, MenuItem, Autocomplete } from '@mui/material';
 import { ICategorias } from '../../Interface';
 import { StyledTextField } from '../../Themes';
-import { toast } from 'react-toastify';
+import { SelectChangeEvent } from '@mui/material-next';
+import SelectCategoria from '../../Components/Select/Select';
 
 
 
@@ -13,20 +14,29 @@ export const CriarPostagem = () => {
 
     const navigate = useNavigate();
 
-    const [categorias, setCategorias] = useState<ICategorias[]>()
+    const [isLoading, setIsLoading] = useState(false)
 
+    const [listaCategorias, setListaCategorias] = useState<ICategorias[]>([]);
+    const [categoriaSelecionado, setCategoriaSelecionado] = useState<ICategorias | null>(
+        null
+    );
 
 
     useEffect(() => {
         axios
-            .get('http://localhost:3001/categorias/')
-            .then((response) => {
-                console.log(response)
-                setCategorias(response.data);
-            }).catch((error) => {
-                toast.error('falha ao cadastrar')
+            .get<{ response: ICategorias[] }>('http://localhost:8000/categorias/')
+            .then(({ data }) => {
+                console.log("data", data.response);
+                console.log("data", data);
+                setListaCategorias(data.response);
+            })
+            .catch((error) => {
+                console.error('Erro ao obter categorias:', error);
             });
     }, []);
+
+
+    console.log('categorias 2', listaCategorias)
 
 
     const handleSubmit = (event: React.FormEvent) => {
@@ -72,8 +82,21 @@ export const CriarPostagem = () => {
                                 label={'Categoria'}
                             />
                             {/* <Select
-                                value={categorias}
-                            /> */}
+                                placeholder='Categorias'
+                            >
+                                {listaCategorias.map((categoria) => (
+                                    <MenuItem
+                                        key={categoria.cat_id}
+                                        value={categoria.cat_id}
+                                    //style={getStyles(name, personName, theme)}
+                                    >
+                                        {categoria.cat_nome}
+                                    </MenuItem>
+                                ))}
+                            </Select> */}
+                            <SelectCategoria
+                                categorias={listaCategorias}
+                            />
                             <TextField
                                 label={'Tags'}
                             />

@@ -1,31 +1,32 @@
 import React, { ChangeEvent } from 'react';
+import { ICategorias } from '../../Interface';
+import { MenuItem, Select } from '@mui/material';
 
-interface SelectProps {
-    options: string[];
-    value: string;
-    onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-    labelTexto: string;
+interface SelectCategoriaProps {
+    categorias: ICategorias[];
+    onCategoriaSelonecionado?: (categoria: ICategorias) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ options, value, onChange, labelTexto }) => {
+
+const SelectCategoria: React.FC<SelectCategoriaProps> = ({ categorias, onCategoriaSelonecionado }) => {
+    console.log("categorias do selectCategorias", categorias)
     return (
-        <div className="flex flex-col w-fit mb-4 text-center">
-            <label className="mb-2 text-black font-roboto">
-                {labelTexto}
-            </label>
-            <select value={value} onChange={onChange}
-                className='py-2 px-4 text-lg w-60 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-crimson focus:border-crimson text-black font-roboto'
-            >
-                {options.map((option, index) => (
-                    <option key={index} value={option}
-                        className='py-2 px-4 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-crimson focus:border-crimson text-black font-roboto'
-                    >
-                        {option}
-                    </option>
-                ))}
-            </select>
-        </div>
+        <Select
+            placeholder='Categorias'
+        >
+            {categorias.map((categoria) => (
+                <MenuItem
+                    key={categoria.cat_id}
+                    value={categoria.cat_id}
+                //style={getStyles(name, personName, theme)}
+                >
+                    {categoria.cat_nome}
+                </MenuItem>
+            ))}
+        </Select>
     );
 };
 
-export default Select;
+export default SelectCategoria;
+
+

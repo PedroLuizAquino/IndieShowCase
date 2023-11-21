@@ -10,33 +10,6 @@ import { MenuDrawer } from '../MenuDrawer';
 import { SearchBar } from '../SearchBar/SearchBar';
 
 
-const labelCategorias = [
-    {
-        label: 'Jogos',
-        to: '/jogos',
-    },
-    {
-        label: 'Quadrinhos',
-        to: '/quadrinhos',
-    },
-    {
-        label: 'Ilustrações',
-        to: '/ilustracao',
-    },
-    {
-        label: 'Animações',
-        to: '/animacao'
-    },
-    {
-        label: 'Musica/Audio',
-        to: '/musica'
-    },
-    {
-        label: 'WebFiction',
-        to: '/webficiton'
-    }
-];
-
 
 export const Navbar = () => {
     const navigate = useNavigate();
