@@ -10,13 +10,17 @@ type CardPostagemProps = {
 
 export const CardPostagem = ({ postagem }: CardPostagemProps) => {
 
+    console.log(postagem.pos_capa)
+    console.log(`http://localhost:8000/${postagem.pos_capa}`)
+
+
     return (
         <Box width={'345px'} padding={'10px'}>
             <Card>
                 <CardMedia
                     component='img'
                     height='140'
-                    image={postagem.pos_capa ? postagem.pos_capa : logo}
+                    image={postagem.pos_capa ? `http://localhost:8000/${postagem.pos_capa}` : logo}
                     sx={{ borderRadius: '5px' }}
                 />
                 <CardContent>
