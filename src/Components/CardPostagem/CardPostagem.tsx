@@ -1,6 +1,7 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
 import logo from '../../assets/logo2.png'
 import { IPostagem } from "../../Interface";
+import { useNavigate } from "react-router-dom";
 //import logo2 from '../../../../IndieAPI/postagens/30/32.png';
 
 
@@ -10,9 +11,8 @@ type CardPostagemProps = {
 
 export const CardPostagem = ({ postagem }: CardPostagemProps) => {
 
-    console.log(postagem.pos_capa)
-    console.log(`http://localhost:8000/${postagem.pos_capa}`)
-
+    console.log(postagem)
+    const navigate = useNavigate();
 
     return (
         <Box width={'345px'} padding={'10px'}>
@@ -33,7 +33,9 @@ export const CardPostagem = ({ postagem }: CardPostagemProps) => {
                 </CardContent>
                 <CardActions>
                     <Button size='small' color="pedro"> Share</Button>
-                    <Button size='small' color='pedro'> Ler Mais</Button>
+                    <Button size='small' color='pedro'
+                        onClick={() => navigate(`/postagem/${postagem.pos_id}`)}
+                    > Ler Mais</Button>
                 </CardActions>
             </Card>
         </Box>

@@ -24,8 +24,8 @@ export const Navbar = () => {
 
 
     return (
-        <Box sx={{ flexGrow: 1 }} bgcolor={"#2E336B"}>
-            <AppBar position="static" color='transparent'>
+        <Box marginBottom={'100px'}>
+            <AppBar position="fixed" color='primary'>
                 <Toolbar >
                     <Box paddingRight={2}
                         display={'flex'}

@@ -27,7 +27,7 @@ export const HomePage = () => {
     return (
         <Container maxWidth={'lg'}>
 
-            <Grid container spacing={5} style={{ marginTop: '20px' }}>
+            <Grid container spacing={5} >
                 {listaPostagem.map((postagem, index) => (
                     <Grid item xs={12} sm={4} key={index}>
                         <CardPostagem postagem={postagem} />

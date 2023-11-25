@@ -11,6 +11,7 @@ import { CadastroUsuario } from '../Pages/CadastroUsuario/CadastroUsuario';
 import { RecuperarSenha } from '../Pages/RecuperarSenha/RecuperarSenha';
 import { AlterarSenha } from '../Pages/AlterarSenha/AlterarSenha';
 import { HomePage } from '../Pages/HomePage/HomePage';
+import { DetalhePostagens } from '../Pages/Postagens/Postagens';
 
 
 export default function AppRouter() {
@@ -31,6 +32,7 @@ export default function AppRouter() {
                     <Route path="login" element={<LoginUsuario />} />
                     <Route path="recuperarSenha" element={<RecuperarSenha />} />
                     <Route path="alterarSenha" element={<AlterarSenha />} />
+                    <Route path="/postagem/:pos_id" element={<DetalhePostagens />} />
                     <Route path="*" element={<Pagina404 />} />
 
                 </Route>

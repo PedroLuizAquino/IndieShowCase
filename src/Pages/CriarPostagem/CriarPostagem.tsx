@@ -74,8 +74,11 @@ export const CriarPostagem = () => {
             });
 
             console.log('File uploaded successfully');
+            toast.success('Postagem Criada')
+            navigate('/')
         } catch (error) {
             console.error('Error uploading file:', error);
+            toast.error('Erro ao criar a postagem')
         }
 
         console.log(data)
