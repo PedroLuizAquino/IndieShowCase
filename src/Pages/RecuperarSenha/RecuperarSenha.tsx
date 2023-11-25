@@ -83,6 +83,9 @@ export const RecuperarSenha = () => {
                         label="Email"
                         margin='dense'
                         {...register('email')}
+                        helperText={errors.email?.message}
+                        error={!!errors.email?.message}
+                        type='email'
 
                     />
 

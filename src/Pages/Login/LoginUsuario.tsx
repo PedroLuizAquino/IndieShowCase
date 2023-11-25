@@ -17,13 +17,14 @@ export const LoginUsuario = () => {
 
 
     const LoginUserFormSchema = z.object({
-        email: z.string(),
-        password: z.string()
+        email: z.string().nonempty('campo obrigatorio')
+            .email('Formato de email inválido'),
+        password: z.string().nonempty('campo obrigatorio')
 
     })
     type LoginFormData = z.infer<typeof LoginUserFormSchema>
 
-    const { register, handleSubmit } = useForm<LoginFormData>({
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
         resolver: zodResolver(LoginUserFormSchema)
     });
 
@@ -36,7 +37,11 @@ export const LoginUsuario = () => {
             })
             .then((response) => {
                 //setMensagemErro(true);
-                navigate('/');
+                if (response.status === 200) {
+                    localStorage.setItem("token", response.data.token)
+                    navigate('/');
+                    window.location.reload();
+                }
             }).catch((error) => {
                 toast.error('email ou senha incorretos')
             });
@@ -83,13 +88,18 @@ export const LoginUsuario = () => {
                     <TextField
                         label="Email"
                         {...register('email')}
+                        helperText={errors.email?.message}
+                        error={!!errors.email?.message}
+                        type='email'
 
                     />
 
                     <TextField
                         label="Senha"
                         {...register('password')}
-
+                        type='password'
+                        helperText={errors.password?.message}
+                        error={!!errors.password?.message}
                     />
                     <Box
                         display={'flex'}

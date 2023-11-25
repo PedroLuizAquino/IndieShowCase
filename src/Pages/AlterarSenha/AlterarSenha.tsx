@@ -4,6 +4,7 @@ import { Box, Container, Paper, TextField, Typography, Button } from '@mui/mater
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useLocation, useParams } from 'react-router-dom';
 
 
 
@@ -24,16 +25,25 @@ export const AlterarSenha = () => {
         resolver: zodResolver(ForgotPassowrdUserFormSchema)
     });
 
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const token = searchParams.get('token');
+
+    console.log(token)
+
+
 
     const recuperaSenha = (data: RecuperarSenhaFormData) => {
+        console.log(data)
         axios
-            .post('http://localhost:8000/usuarios/nova-senha', {
+            .post(`http://localhost:8000/usuarios/nova-senha?token=${token}`, {
                 senha: data.password,
             })
             .then((response) => {
                 toast.success('Senha alterada com sucesso')
+
             }).catch((error) => {
-                toast.error('Senha não pode ser identica a atual')
+                toast.error('Senha não pode ser indentica a atual')
             });
 
     }
@@ -76,13 +86,18 @@ export const AlterarSenha = () => {
 
                     <TextField
                         label="Senha"
+                        type='password'
                         {...register('password')}
+                        helperText={errors.password?.message}
+                        error={!!errors.password?.message}
 
                     />
                     <TextField
-                        label="Senha"
+                        label="Confirmação de senha"
+                        type='password'
                         {...register('confirmPassword')}
-
+                        helperText={errors.confirmPassword?.message}
+                        error={!!errors.confirmPassword?.message}
                     />
                     <Box width={'100%'} display={'flex'} justifyContent={'center'} marginTop={2}>
                         <Box>

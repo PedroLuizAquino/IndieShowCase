@@ -14,7 +14,7 @@ import { AlterarSenha } from '../Pages/AlterarSenha/AlterarSenha';
 
 export default function AppRouter() {
 
-
+    const userToken = localStorage.getItem('token'); // exemplo de onde você pode armazenar o token
 
 
     return (
@@ -23,10 +23,10 @@ export default function AppRouter() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<CadastroUsuario />} />
 
-                    <Route path='/criarPostagem' element={<CriarPostagem />} />
 
                     {/* Rotas do Gerais */}
-                    <Route path="cadastroUsuario" element={<CadastroUsuario />} />
+                    <Route path="criarPostagem" element={userToken ? <CriarPostagem /> : <Pagina404 />} />
+                    <Route path='/cadastroUsuario' element={<CadastroUsuario />} />
                     <Route path="login" element={<LoginUsuario />} />
                     <Route path="recuperarSenha" element={<RecuperarSenha />} />
                     <Route path="alterarSenha" element={<AlterarSenha />} />

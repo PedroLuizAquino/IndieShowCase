@@ -8,11 +8,20 @@ import logo from '../../assets/logo2.png'
 import { Drawer, TextField } from '@mui/material';
 import { MenuDrawer } from '../MenuDrawer';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { useEffect, useState } from 'react';
 
 
 
 export const Navbar = () => {
     const navigate = useNavigate();
+    const [token, setToken] = useState<string | null>(null);
+
+
+    useEffect(() => {
+        const userToken = localStorage.getItem('token'); // exemplo de onde você pode armazenar o token
+        setToken(userToken);
+    }, [0]);
+
 
     return (
         <Box sx={{ flexGrow: 1 }} bgcolor={"#2E336B"}>
@@ -41,10 +50,19 @@ export const Navbar = () => {
                         /> */}
                         <SearchBar />
                     </Box>
-                    <Box gap={1} display={'flex'} >
-                        <Button color='pedro' variant='text' onClick={() => navigate('/cadastroUsuario')} >Cadastrar</Button>
-                        <Button variant='text' color='pedro' onClick={() => navigate('/login')}>Login</Button>
+                    {token ? (<Box gap={1} display={'flex'} >
+                        <Button color='pedro' variant='text' onClick={() => navigate('/criarPostagem')} >Criar Anuncio</Button>
+                        <Button variant='text' color='pedro' onClick={() => {
+                            localStorage.removeItem('token')
+                            window.location.reload();
+                        }}>Logout</Button>
                     </Box>
+                    ) : (
+                        <Box gap={1} display={'flex'} >
+                            <Button color='pedro' variant='text' onClick={() => navigate('/cadastroUsuario')} >Cadastrar</Button>
+                            <Button variant='text' color='pedro' onClick={() => navigate('/login')}>Login</Button>
+                        </Box>
+                    )}
                 </Toolbar>
             </AppBar>
         </Box>
