@@ -10,6 +10,7 @@ import { CriarPostagem } from '../Pages/CriarPostagem/CriarPostagem';
 import { CadastroUsuario } from '../Pages/CadastroUsuario/CadastroUsuario';
 import { RecuperarSenha } from '../Pages/RecuperarSenha/RecuperarSenha';
 import { AlterarSenha } from '../Pages/AlterarSenha/AlterarSenha';
+import { HomePage } from '../Pages/HomePage/HomePage';
 
 
 export default function AppRouter() {
@@ -21,7 +22,7 @@ export default function AppRouter() {
         <Router>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<CadastroUsuario />} />
+                    <Route index element={<HomePage />} />
 
 
                     {/* Rotas do Gerais */}

@@ -20,7 +20,6 @@ export const CriarPostagem = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [listaCategorias, setListaCategorias] = useState<ICategorias[]>([]);
-    const [categoriaSelecionado, setCategoriaSelecionado] = useState<number>(0);
     const [token, setToken] = useState<string | null>(null);
 
     const imagensExtensao = ['jpg', 'jpeg', 'png', 'gif'];
@@ -47,7 +46,7 @@ export const CriarPostagem = () => {
         tags: z.string(),
         descricao: z.string(),
         arquivo: z.instanceof(FileList).transform(list => list.item(0)!),
-        imagem: z.instanceof(FileList).transform(list => list.item(0)!)
+        capa: z.instanceof(FileList).transform(list => list.item(0)!)
     });
 
     type createPostFormData = z.infer<typeof createPostFormSchema>
@@ -64,7 +63,7 @@ export const CriarPostagem = () => {
             formData.append('tags', data.tags);
             formData.append('cat_id', data.categoria.toString());
             formData.append('arquivos', data.arquivo);
-            formData.append('capa', data.imagem);
+            formData.append('capa', data.capa);
 
 
             await axios.post('http://localhost:8000/postagens/publicar', formData, {
@@ -192,7 +191,7 @@ export const CriarPostagem = () => {
                                     </Typography>
                                     <StyledTextField
                                         type='file'
-                                        {...register('imagem')}
+                                        {...register('capa')}
                                         placeholder='Imagem'
                                     />
                                 </Box>

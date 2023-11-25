@@ -54,6 +54,7 @@ export const Navbar = () => {
                         <Button color='pedro' variant='text' onClick={() => navigate('/criarPostagem')} >Criar Anuncio</Button>
                         <Button variant='text' color='pedro' onClick={() => {
                             localStorage.removeItem('token')
+                            navigate('/')
                             window.location.reload();
                         }}>Logout</Button>
                     </Box>
