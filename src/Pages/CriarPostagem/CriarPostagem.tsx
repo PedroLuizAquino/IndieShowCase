@@ -63,8 +63,8 @@ export const CriarPostagem = () => {
             formData.append('descricao', data.descricao);
             formData.append('tags', data.tags);
             formData.append('cat_id', data.categoria.toString());
-            formData.append('arquivo', data.arquivo);
-            //formData.append('imagem', data.imagem);
+            formData.append('arquivos', data.arquivo);
+            formData.append('capa', data.imagem);
 
 
             await axios.post('http://localhost:8000/postagens/publicar', formData, {
