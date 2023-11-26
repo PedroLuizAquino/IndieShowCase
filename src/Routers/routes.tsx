@@ -11,7 +11,7 @@ import { CadastroUsuario } from '../Pages/CadastroUsuario/CadastroUsuario';
 import { RecuperarSenha } from '../Pages/RecuperarSenha/RecuperarSenha';
 import { AlterarSenha } from '../Pages/AlterarSenha/AlterarSenha';
 import { HomePage } from '../Pages/HomePage/HomePage';
-import { DetalhePostagens } from '../Pages/Postagens/Postagens';
+import { DetalhePostagens } from '../Pages/DetalhePostagens/DetalhePostagens';
 
 
 export default function AppRouter() {
