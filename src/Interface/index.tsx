@@ -18,3 +18,24 @@ export interface IPostagem {
     pos_download: boolean;
     pos_capa: string;
 }
+
+
+export interface IUsuario {
+    usu_id: number;
+    usu_nome: string;
+    usu_email: string;
+    usu_senha: string;
+    usu_totalPublicacao: string;
+    usu_totalFavorito: string;
+    usu_status: string;
+    usu_admin: string;
+    usu_datacriado: string;
+    usu_foto: string;
+}
+
+export interface IComentarios {
+    com_comentarios: number;
+    com_texto: string;
+    usu_id: number;
+    pos_id: number;
+}

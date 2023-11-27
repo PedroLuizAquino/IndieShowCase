@@ -34,11 +34,6 @@ export const HomePage = () => {
 
                     </Grid>
                 ))}
-
-                {/* <Grid item xs={12} sm={4} key={1}>
-                    <CardPostagem />
-
-                </Grid> */}
             </Grid>
         </Container>
     )

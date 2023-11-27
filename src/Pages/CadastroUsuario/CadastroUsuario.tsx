@@ -12,7 +12,6 @@ export const CadastroUsuario = () => {
     const navigate = useNavigate();
 
 
-
     const createUserFormSchema = z.object({
         name: z.string().nonempty('campo obrigatorio'),
         email: z.string().nonempty('campo obrigatorio')

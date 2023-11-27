@@ -116,7 +116,7 @@ export const CriarPostagem = () => {
 
 
                         <Grid item xs={6}>
-                            <Typography variant='h4' color={'white'}>
+                            <Typography variant='h4' color={'white'} marginTop={'-10rem'}>
                                 Criar Postagem
                             </Typography>
                             <Box
