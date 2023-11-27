@@ -93,6 +93,7 @@ export const CadastroUsuario = () => {
                     <TextField
                         label="Nome"
                         {...register('name')}
+                        color='pedro'
                         helperText={errors.name?.message}
                         variant='outlined'
                         error={!!errors.name?.message}
@@ -110,6 +111,7 @@ export const CadastroUsuario = () => {
                     <TextField
                         label="Senha"
                         type='password'
+                        color='pedro'
                         {...register('password')}
                         helperText={errors.password?.message}
                         error={!!errors.password?.message}
@@ -117,6 +119,7 @@ export const CadastroUsuario = () => {
                     <TextField
                         label="Confirmação de senha"
                         type='password'
+                        color='pedro'
                         {...register('confirmPassword')}
                         helperText={errors.confirmPassword?.message}
                         error={!!errors.confirmPassword?.message}

@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IPostagem } from "../../Interface";
 import axios from "axios";
 import { CardPostagem } from "../../Components/CardPostagem/CardPostagem";
-import { Box, CardMedia, Container, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, CardMedia, Container, Grid, Paper, Typography } from "@mui/material";
 import logo from '../../assets/logo2.png'
 import { AutorPostagem } from "../../Components/AutorPostagem/AutorPostagem";
 import { ComentariosPostagem } from "../../Components/ComentariosPostagem/ComentariosPostagem";
+import { Comentar } from "../../Components/Comentar/Comentar";
 
 
 export const DetalhePostagens = () => {
@@ -17,6 +18,9 @@ export const DetalhePostagens = () => {
     const navigate = useNavigate()
 
     const [postagem, setPostagem] = useState<IPostagem | null>(null);
+
+    const token = localStorage.getItem('token');
+
 
     useEffect(() => {
         console.log('pos_id:', pos_id);
@@ -41,34 +45,14 @@ export const DetalhePostagens = () => {
 
     // Faça algo com o ID (por exemplo, renderize os detalhes da postagem com base no ID)
     return postagem && (
-        <Container maxWidth={'lg'}>
-            {/* <Box
-                margin={6}
-                maxWidth={3000}
-                height={700}
-                maxHeight={900}
-                display={'flex'}
-                gap={1}
-                flexDirection={'column'}
-                justifyItems={'center'}
-                alignItems={'center'}
-                borderRadius={'15px'}
-                component={Paper}
-                padding={5}
-                boxShadow={2}
-            >
-                <Typography>
-                    {postagem?.pos_nome}
-                </Typography>
-
-
-            </Box> */}
+        <Container maxWidth={'lg'}
+        >
             <Box
                 margin={6}
                 maxWidth={3000}
-                height={1000}
-                maxHeight={900}
+                height={1200}
                 display={'flex'}
+
                 gap={1}
                 flexDirection={'column'}
                 justifyItems={'center'}
@@ -109,32 +93,47 @@ export const DetalhePostagens = () => {
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Box alignItems={'center'} display={'flex'} justifyContent={'center'}>
-
+                        <Box display={'flex'} justifyContent={'center'}>
+                            <br />
+                            <br />
                             <Typography>
-                                Sobre o autor
+                                "futuro espaço do arquivo"
                             </Typography>
-
-
+                            <br />
+                            <br />
+                            <br />
                         </Box>
-                        <AutorPostagem
-                            postagem={postagem}
-                        />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={6}>
+                        <Box alignItems={'center'} display={'flex'} position={'relative'} gap={2} paddingTop={2}>
+                            <AutorPostagem
+                                postagem={postagem}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Box alignItems={'center'} display={'flex'} position={'relative'} justifyContent={'end'} gap={2} paddingTop={2}>
+                            <Button variant="contained" color="secondary">
+                                Curtir {postagem.pos_qtdGostei}
+                            </Button>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12}>
                         <Box alignItems={'center'} display={'flex'} justifyContent={'center'}>
-                            <Typography>
-                                Comentarios
+                            <Typography margin={1}>
+                                Comentários
                             </Typography>
                         </Box>
+                        {token ? <Comentar postagem={postagem} />
+                            :
+                            <Box display={'flex'} justifyContent={'center'} padding={5} gap={1} flexDirection={'column'} alignItems={'center'}>
+                                <Typography>Usuario prescisa estar logado para comentar</Typography>
+                                <Box display={'flex'} flexDirection={'row'} justifyContent={'center'} alignItems={'center'} gap={2}>
+                                    <Button variant="text" color="pedro" onClick={() => navigate('/cadastroUsuario')}>Cadastrar</Button>
+                                    <Button variant="text" color="pedro" onClick={() => navigate('/login')}>Logar</Button>
+                                </Box>
+                            </Box>
+                        }
                         <ComentariosPostagem postagem={postagem} />
                     </Grid>
                 </Grid>

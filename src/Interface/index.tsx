@@ -38,4 +38,12 @@ export interface IComentarios {
     com_texto: string;
     usu_id: number;
     pos_id: number;
+    com_data: Date;
+}
+
+interface TokenPayload {
+    usu_id: string;
+    usu_nome: string;
+    usu_email: string;
+    usu_foto: string;
 }

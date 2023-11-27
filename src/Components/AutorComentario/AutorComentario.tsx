@@ -1,27 +1,22 @@
+import { Avatar, Box, Typography } from "@mui/material"
+import { IComentarios, IUsuario } from "../../Interface";
 import { useEffect, useState } from "react";
-import { IPostagem, IUsuario } from "../../Interface";
 import axios from "axios";
-import { Avatar, Box, Typography } from "@mui/material";
-import { jwtDecode } from "jwt-decode";
 
-
-type AutorPostagemProps = {
-    postagem: IPostagem;
+type AutorComentarioProps = {
+    comentario: IComentarios;
 }
 
-
-export const AutorPostagem = ({ postagem }: AutorPostagemProps) => {
+export const AutorComentario = ({ comentario }: AutorComentarioProps) => {
 
     const [usuario, setUsuario] = useState<IUsuario | null>(null);
 
 
-
     useEffect(() => {
-        console.log('pos_id:', postagem.pos_id);
-        console.log('usu_id:', postagem.usu_id);
+        console.log('usu_id:', comentario.usu_id);
 
         axios
-            .get<{ response: IUsuario[] }>(`http://localhost:8000/usuarios/${postagem.usu_id}/`)
+            .get<{ response: IUsuario[] }>(`http://localhost:8000/usuarios/${comentario.usu_id}/`)
             .then(({ data }) => {
                 console.log("data usu_id", data.response);
                 console.log("data usu_id", data);
@@ -36,23 +31,21 @@ export const AutorPostagem = ({ postagem }: AutorPostagemProps) => {
                 }
             });
 
-    }, [postagem.usu_id]);
-
-
-    console.log('postagem detalhada', postagem)
-    console.log(`http://localhost:8000/${usuario?.usu_foto}`)
-
+    }, [comentario.usu_id]);
     return (
         <>
             <Avatar
-                alt="foto do autor"
+                alt="foto do autor o comentario"
                 src={`http://localhost:8000/${usuario?.usu_foto}`}
             />
-            <Typography variant="body1" >
-                {usuario?.usu_nome}
-            </Typography>
-
+            <Box display={'flex'} flexDirection={'column'}>
+                <Typography>
+                    {usuario?.usu_nome}
+                </Typography>
+                <Typography>
+                    {comentario.com_texto}
+                </Typography>
+            </Box>
         </>
     )
-
 }

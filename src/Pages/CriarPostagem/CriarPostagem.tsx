@@ -131,11 +131,13 @@ export const CriarPostagem = () => {
                                     label={'Titulo'}
                                     {...register('titulo')}
                                     helperText={errors.titulo?.message}
+                                    color='pedro'
                                     error={!!errors.titulo?.message}
                                 />
                                 <TextField
                                     label={'Tags'}
                                     {...register('tags')}
+                                    color='pedro'
                                     helperText={errors.tags?.message}
                                     error={!!errors.tags?.message}
                                 />
@@ -143,6 +145,7 @@ export const CriarPostagem = () => {
                                 <TextField
                                     label={'Categorias'}
                                     select
+                                    color='pedro'
                                     //value={categoriaSelecionado}
                                     {...register('categoria')}
                                 //onChange={() => { }}
@@ -173,6 +176,7 @@ export const CriarPostagem = () => {
                                     label={'Descrição'}
                                     {...register('descricao')}
                                     maxRows={6}
+                                    color='pedro'
                                     rows={6}
                                     helperText={errors.descricao?.message}
                                     error={!!errors.descricao?.message}
@@ -183,6 +187,7 @@ export const CriarPostagem = () => {
                                     </Typography>
                                     <StyledTextField
                                         type='file'
+                                        color='pedro'
                                         {...register('arquivo')}
                                     />
                                 </Box>
@@ -194,6 +199,7 @@ export const CriarPostagem = () => {
                                     </Typography>
                                     <StyledTextField
                                         type='file'
+                                        color='pedro'
                                         {...register('capa')}
                                         placeholder='Imagem'
                                     />

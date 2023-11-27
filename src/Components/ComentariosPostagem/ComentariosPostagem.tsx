@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { IComentarios, IPostagem } from "../../Interface";
+import { IComentarios, IPostagem, IUsuario } from "../../Interface";
 import axios from "axios";
-import { Box } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
+import { AutorComentario } from "../AutorComentario/AutorComentario";
 
 type ComentariosPostagemProps = {
     postagem: IPostagem;
@@ -11,6 +12,9 @@ type ComentariosPostagemProps = {
 export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
 
     const [comentarios, setComentarios] = useState<IComentarios[]>([]);
+    const [usuario, setUsuario] = useState<IUsuario | null>(null);
+
+
 
 
     useEffect(() => {
@@ -34,13 +38,26 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
 
     }, [postagem.pos_id]);
 
+
+
     console.log('postagem detalhada', postagem)
 
     return (
         <Box>
             {comentarios.map((comentarios, index) => (
-                <Box key={index}>
-                    {/* <CardPostagem postagem={postagem} /> */}
+                <Box key={index} display={'flex'} flexDirection={'row'} gap={2} paddingBottom={4}>
+                    {/* <Avatar />
+                    <Box display={'flex'} flexDirection={'column'}>
+                        <Typography>
+                            nome do usuario que comentou
+                        </Typography>
+                        <Typography>
+                            {comentarios.com_texto}
+                        </Typography>
+                    </Box> */}
+                    <AutorComentario
+                        comentario={comentarios}
+                    />
                 </Box>
             ))}
 

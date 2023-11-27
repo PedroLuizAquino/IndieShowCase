@@ -1,8 +1,15 @@
+import { Box, Typography } from "@mui/material";
+
 const Pagina404 = () => {
     return (
-        <div>
-            <div>Pagina do erro 404</div>
-        </div>
+        <Box display={'flex'} justifyItems={'center'} alignItems={'center'}
+            width={'100vw'}
+
+        >
+            <Typography variant="h1" color={'white'}>
+                Página 404
+            </Typography>
+        </Box>
     );
 };
 

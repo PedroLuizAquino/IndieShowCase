@@ -51,7 +51,7 @@ export const Navbar = () => {
                         <SearchBar />
                     </Box>
                     {token ? (<Box gap={1} display={'flex'} >
-                        <Button color='pedro' variant='text' onClick={() => navigate('/criarPostagem')} >Criar Anuncio</Button>
+                        <Button color='pedro' variant='text' onClick={() => navigate('/criarPostagem')} >Pulbicar</Button>
                         <Button variant='text' color='pedro' onClick={() => {
                             localStorage.removeItem('token')
                             navigate('/')

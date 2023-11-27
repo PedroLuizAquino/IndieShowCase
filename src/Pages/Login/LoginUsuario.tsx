@@ -90,6 +90,7 @@ export const LoginUsuario = () => {
                         {...register('email')}
                         helperText={errors.email?.message}
                         error={!!errors.email?.message}
+                        color='pedro'
                         type='email'
 
                     />
@@ -100,6 +101,7 @@ export const LoginUsuario = () => {
                         type='password'
                         helperText={errors.password?.message}
                         error={!!errors.password?.message}
+                        color='pedro'
                     />
                     <Box
                         display={'flex'}
