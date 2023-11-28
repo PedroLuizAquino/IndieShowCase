@@ -36,7 +36,7 @@ export const AutorPostagem = ({ postagem }: AutorPostagemProps) => {
                 }
             });
 
-    }, [postagem.usu_id]);
+    }, []);
 
 
     console.log('postagem detalhada', postagem)

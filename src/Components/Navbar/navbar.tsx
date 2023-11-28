@@ -20,7 +20,7 @@ export const Navbar = () => {
     useEffect(() => {
         const userToken = localStorage.getItem('token'); // exemplo de onde você pode armazenar o token
         setToken(userToken);
-    }, [0]);
+    }, []);
 
 
     return (

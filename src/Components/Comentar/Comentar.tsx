@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { IComentarios, IPostagem } from "../../Interface";
 import axios from "axios";
 import { Avatar, Box, Button, TextField } from "@mui/material";

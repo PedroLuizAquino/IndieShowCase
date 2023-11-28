@@ -31,7 +31,7 @@ export const AutorComentario = ({ comentario }: AutorComentarioProps) => {
                 }
             });
 
-    }, [comentario.pos_id]);
+    }, []);
     return (
         <>
             <Avatar

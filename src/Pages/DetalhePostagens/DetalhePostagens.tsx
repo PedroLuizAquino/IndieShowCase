@@ -41,7 +41,7 @@ export const DetalhePostagens = () => {
                 }
             });
 
-    }, [pos_id]);
+    }, []);
     console.log('postagem detalhada', postagem)
 
     // Faça algo com o ID (por exemplo, renderize os detalhes da postagem com base no ID)

@@ -28,7 +28,7 @@ export const JogosPage = () => {
             .catch((error) => {
                 console.error('Erro ao obter categorias:', error);
             });
-    }, [1]);
+    }, []);
 
     if (categoria === null) {
         return <p>Carregando...</p>; // ou qualquer indicador de carregamento desejado

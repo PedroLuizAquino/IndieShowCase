@@ -38,7 +38,7 @@ export const CriarPostagem = () => {
 
         const userToken = localStorage.getItem('token'); // exemplo de onde você pode armazenar o token
         setToken(userToken);
-    }, [0]);
+    }, []);
 
     const createPostFormSchema = z.object({
         titulo: z.string().nonempty('campo obrigatorio'),

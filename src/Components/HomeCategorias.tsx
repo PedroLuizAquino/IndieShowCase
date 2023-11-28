@@ -25,7 +25,9 @@ export const HomeCategoria = ({ categoria }: HomeCategoriaProps) => {
             .catch((error) => {
                 console.error('Erro ao obter categorias:', error);
             });
-    }, [1]);
+    }, []);
+
+
 
     return (
         <Container maxWidth={'lg'}>
