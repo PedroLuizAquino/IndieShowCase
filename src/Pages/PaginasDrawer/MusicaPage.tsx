@@ -12,14 +12,14 @@ import Pagina404 from "../Pagina404/Pagina404";
 
 
 
-export const JogosPage = () => {
+export const MusicaPage = () => {
 
     const [categoria, setCategoria] = useState<ICategorias | null>(null);
 
 
     useEffect(() => {
         axios
-            .get<{ response: ICategorias[] }>(`http://localhost:8000/postagens/listarNome/Jogos`)
+            .get<{ response: ICategorias[] }>(`http://localhost:8000/postagens/listarNome/Musica`)
             .then(({ data }) => {
                 console.log("data categoria", data.response);
                 console.log("data categoria", data);

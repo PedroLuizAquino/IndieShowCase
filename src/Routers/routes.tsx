@@ -12,6 +12,12 @@ import { RecuperarSenha } from '../Pages/RecuperarSenha/RecuperarSenha';
 import { AlterarSenha } from '../Pages/AlterarSenha/AlterarSenha';
 import { HomePage } from '../Pages/HomePage/HomePage';
 import { DetalhePostagens } from '../Pages/DetalhePostagens/DetalhePostagens';
+import { JogosPage } from '../Pages/PaginasDrawer/JogosPage';
+import { QuadrinhosPage } from '../Pages/PaginasDrawer/QuadrinhosPage';
+import { IlustracaoPage } from '../Pages/PaginasDrawer/IlustracaoPage';
+import { AnimacaoPage } from '../Pages/PaginasDrawer/AnimacaoPage';
+import { MusicaPage } from '../Pages/PaginasDrawer/MusicaPage';
+import { WebFicPage } from '../Pages/PaginasDrawer/WebFicPage';
 
 
 export default function AppRouter() {
@@ -34,6 +40,12 @@ export default function AppRouter() {
                     <Route path="alterarSenha" element={<AlterarSenha />} />
                     <Route path="/postagem/:pos_id" element={<DetalhePostagens />} />
                     <Route path="*" element={<Pagina404 />} />
+                    <Route path='/jogos' element={<JogosPage />} />
+                    <Route path='/quadrinhos' element={<QuadrinhosPage />} />
+                    <Route path='/ilustracao' element={<IlustracaoPage />} />
+                    <Route path='/animacao' element={<AnimacaoPage />} />
+                    <Route path='/musica' element={<MusicaPage />} />
+                    <Route path='/webficiton' element={<WebFicPage />} />
 
                 </Route>
             </Routes>

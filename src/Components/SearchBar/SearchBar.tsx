@@ -13,6 +13,7 @@ export const SearchBar = () => {
             type="text"
             variant="outlined"
             sx={{ width: '400px' }}
+            color="pedro"
             size="small"
             onChange={(e) => setValue(e.target.value)}
             value={value}
