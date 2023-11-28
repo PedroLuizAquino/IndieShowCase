@@ -28,9 +28,6 @@ export const DetalhePostagens = () => {
         axios
             .get<{ response: IPostagem[] }>(`http://localhost:8000/postagens/${pos_id}/`)
             .then(({ data }) => {
-                console.log("data", data.response);
-                console.log("data", data);
-                console.log('achou')
                 setPostagem(data.response[0]);
             })
             .catch((error) => {

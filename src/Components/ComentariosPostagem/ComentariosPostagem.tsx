@@ -18,14 +18,10 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
 
 
     useEffect(() => {
-        console.log('pos_id:', postagem.pos_id);
-        console.log('usu_id:', postagem.usu_id);
-
         axios
             .get<{ response: IComentarios[] }>(`http://localhost:8000/postagens/comentarios/${postagem.pos_id}/`)
             .then(({ data }) => {
-                console.log("data comentarios", data.response);
-                console.log("data comentarios", data);
+
                 setComentarios(data.response);
             })
             .catch((error) => {
@@ -36,7 +32,7 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
                 }
             });
 
-    }, [postagem.pos_id]);
+    }, []);
 
 
 

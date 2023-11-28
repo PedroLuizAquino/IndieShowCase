@@ -22,27 +22,22 @@ export const CardPostagem = ({ postagem }: CardPostagemProps) => {
 
 
 
-    // useEffect(() => {
-    //     console.log('pos_id:', postagem.pos_id);
-    //     console.log('usu_id:', postagem.usu_id);
+    useEffect(() => {
 
-    //     axios
-    //         .get<{ response: IUsuario[] }>(`http://localhost:8000/usuarios/${postagem.usu_id}/`)
-    //         .then(({ data }) => {
-    //             console.log("data usu_id", data.response);
-    //             console.log("data usu_id", data);
-    //             console.log('achou')
-    //             setUsuario(data.response[0]);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Erro ao obter detalhes da postagem:', error);
-    //             if (error.response) {
-    //                 console.log('Resposta do servidor:', error.response.data);
-    //                 console.log('Status do servidor:', error.response.status);
-    //             }
-    //         });
+        axios
+            .get<{ response: IUsuario[] }>(`http://localhost:8000/usuarios/${postagem.usu_id}/`)
+            .then(({ data }) => {
+                setUsuario(data.response[0]);
+            })
+            .catch((error) => {
+                console.error('Erro ao obter detalhes da postagem:', error);
+                if (error.response) {
+                    console.log('Resposta do servidor:', error.response.data);
+                    console.log('Status do servidor:', error.response.status);
+                }
+            });
 
-    // }, []);
+    }, []);
 
     return (
         <Box width={'345px'} padding={'10px'}  >

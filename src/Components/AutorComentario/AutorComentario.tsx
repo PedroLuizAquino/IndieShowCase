@@ -13,14 +13,9 @@ export const AutorComentario = ({ comentario }: AutorComentarioProps) => {
 
 
     useEffect(() => {
-        console.log('usu_id:', comentario.usu_id);
-
         axios
             .get<{ response: IUsuario[] }>(`http://localhost:8000/usuarios/${comentario.usu_id}/`)
             .then(({ data }) => {
-                console.log("data usu_id", data.response);
-                console.log("data usu_id", data);
-                console.log('achou')
                 setUsuario(data.response[0]);
             })
             .catch((error) => {

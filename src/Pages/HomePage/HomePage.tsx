@@ -15,8 +15,6 @@ export const HomePage = () => {
         axios
             .get<{ response: IPostagem[] }>('http://localhost:8000/postagens/')
             .then(({ data }) => {
-                console.log("data", data.response);
-                console.log("data", data);
                 setListaPostagem(data.response);
             })
             .catch((error) => {
