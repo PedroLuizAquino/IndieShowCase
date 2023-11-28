@@ -8,6 +8,7 @@ import logo from '../../assets/logo2.png'
 import { AutorPostagem } from "../../Components/AutorPostagem/AutorPostagem";
 import { ComentariosPostagem } from "../../Components/ComentariosPostagem/ComentariosPostagem";
 import { Comentar } from "../../Components/Comentar/Comentar";
+import { CurtirPostagem } from "../../Components/CurtirPostagem/CurtirPostagem";
 
 
 export const DetalhePostagens = () => {
@@ -113,9 +114,9 @@ export const DetalhePostagens = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Box alignItems={'center'} display={'flex'} position={'relative'} justifyContent={'end'} gap={2} paddingTop={2}>
-                            <Button variant="contained" color="secondary">
-                                Curtir {postagem.pos_qtdGostei}
-                            </Button>
+                            <CurtirPostagem
+                                postagem={postagem}
+                            />
                         </Box>
                     </Grid>
                     <Grid item xs={12}>

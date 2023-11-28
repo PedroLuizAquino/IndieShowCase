@@ -1,4 +1,4 @@
-import { Box, Button, Container, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Container, Paper, TextField, Typography } from '@mui/material';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -6,11 +6,13 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { StyledTextField } from '../../Themes';
+import { useState } from 'react';
 
 export const CadastroUsuario = () => {
 
     const navigate = useNavigate();
 
+    const [isLoading, setIsLoading] = useState(false);
 
     const createUserFormSchema = z.object({
         name: z.string().nonempty('campo obrigatorio'),
@@ -36,6 +38,7 @@ export const CadastroUsuario = () => {
         console.log(data.name)
         console.log(data.email)
         console.log(data.password)
+        setIsLoading(true)
 
         axios
             .post('http://localhost:8000/usuarios/cadastro', {
@@ -45,9 +48,11 @@ export const CadastroUsuario = () => {
             })
             .then((response) => {
                 //setMensagemErro(true);
+                setIsLoading(false)
                 toast.success('Usuario Cadastrado')
                 navigate('/login');
             }).catch((error) => {
+                setIsLoading(false)
                 toast.error(error.message)
             });
 
@@ -95,6 +100,7 @@ export const CadastroUsuario = () => {
                         {...register('name')}
                         color='pedro'
                         helperText={errors.name?.message}
+                        disabled={isLoading}
                         variant='outlined'
                         error={!!errors.name?.message}
                     />
@@ -103,6 +109,7 @@ export const CadastroUsuario = () => {
                         label="Email"
                         type='email'
                         {...register('email')}
+                        disabled={isLoading}
                         color='pedro'
                         helperText={errors.email?.message}
                         error={!!errors.email?.message}
@@ -115,6 +122,7 @@ export const CadastroUsuario = () => {
                         {...register('password')}
                         helperText={errors.password?.message}
                         error={!!errors.password?.message}
+                        disabled={isLoading}
                     />
                     <TextField
                         label="Confirmação de senha"
@@ -123,6 +131,7 @@ export const CadastroUsuario = () => {
                         {...register('confirmPassword')}
                         helperText={errors.confirmPassword?.message}
                         error={!!errors.confirmPassword?.message}
+                        disabled={isLoading}
                     />
                     <Box width={'100%'} display={'flex'} justifyContent={'center'} marginTop={2}>
                         <Box>
@@ -131,7 +140,15 @@ export const CadastroUsuario = () => {
                                 color="secondary"
                                 size='large'
                                 type='submit'
-                            >Cadastrar</Button>
+                                endIcon={
+                                    isLoading ?
+                                        <CircularProgress
+                                            variant='indeterminate'
+                                            color='inherit'
+                                            size={20}
+                                        />
+                                        : undefined
+                                }>Cadastrar</Button>
                         </Box>
                     </Box>
                 </Box>

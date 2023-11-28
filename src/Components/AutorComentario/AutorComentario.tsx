@@ -31,7 +31,7 @@ export const AutorComentario = ({ comentario }: AutorComentarioProps) => {
                 }
             });
 
-    }, [comentario.usu_id]);
+    }, [comentario.pos_id]);
     return (
         <>
             <Avatar
@@ -39,10 +39,10 @@ export const AutorComentario = ({ comentario }: AutorComentarioProps) => {
                 src={`http://localhost:8000/${usuario?.usu_foto}`}
             />
             <Box display={'flex'} flexDirection={'column'}>
-                <Typography>
+                <Typography variant="body2">
                     {usuario?.usu_nome}
                 </Typography>
-                <Typography>
+                <Typography variant="body1">
                     {comentario.com_texto}
                 </Typography>
             </Box>

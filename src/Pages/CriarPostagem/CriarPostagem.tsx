@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Container, Grid, Paper, Typography, Button, Select, TextField, OutlinedInput, MenuItem, Autocomplete } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography, Button, Select, TextField, OutlinedInput, MenuItem, Autocomplete, CircularProgress } from '@mui/material';
 import { ICategorias } from '../../Interface';
 import { StyledTextField } from '../../Themes';
 import { SelectChangeEvent } from '@mui/material-next';
@@ -56,6 +56,7 @@ export const CriarPostagem = () => {
     });
 
     const createPost = async (data: createPostFormData) => {
+        setIsLoading(true)
         try {
             const formData = new FormData();
             formData.append('titulo', data.titulo);
@@ -72,11 +73,12 @@ export const CriarPostagem = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            setIsLoading(false)
             console.log('File uploaded successfully');
             toast.success('Postagem Criada')
             navigate('/')
         } catch (error) {
+            setIsLoading(false)
             console.error('Error uploading file:', error);
             toast.error('Erro ao criar a postagem')
         }
@@ -133,6 +135,7 @@ export const CriarPostagem = () => {
                                     helperText={errors.titulo?.message}
                                     color='pedro'
                                     error={!!errors.titulo?.message}
+                                    disabled={isLoading}
                                 />
                                 <TextField
                                     label={'Tags'}
@@ -140,6 +143,7 @@ export const CriarPostagem = () => {
                                     color='pedro'
                                     helperText={errors.tags?.message}
                                     error={!!errors.tags?.message}
+                                    disabled={isLoading}
                                 />
 
                                 <TextField
@@ -148,6 +152,7 @@ export const CriarPostagem = () => {
                                     color='pedro'
                                     //value={categoriaSelecionado}
                                     {...register('categoria')}
+                                    disabled={isLoading}
                                 //onChange={() => { }}
                                 >
                                     {listaCategorias.map((categoria) => (
@@ -180,6 +185,7 @@ export const CriarPostagem = () => {
                                     rows={6}
                                     helperText={errors.descricao?.message}
                                     error={!!errors.descricao?.message}
+                                    disabled={isLoading}
                                 />
                                 <Box>
                                     <Typography variant='h6' color={'white'}>
@@ -189,6 +195,7 @@ export const CriarPostagem = () => {
                                         type='file'
                                         color='pedro'
                                         {...register('arquivo')}
+                                        disabled={isLoading}
                                     />
                                 </Box>
                                 <Box
@@ -202,6 +209,7 @@ export const CriarPostagem = () => {
                                         color='pedro'
                                         {...register('capa')}
                                         placeholder='Imagem'
+                                        disabled={isLoading}
                                     />
                                 </Box>
                             </Box>
@@ -226,7 +234,15 @@ export const CriarPostagem = () => {
                                     color="secondary"
                                     size='large'
                                     type='submit'
-                                >
+                                    endIcon={
+                                        isLoading ?
+                                            <CircularProgress
+                                                variant='indeterminate'
+                                                color='inherit'
+                                                size={20}
+                                            />
+                                            : undefined
+                                    }>
                                     Publicar
                                 </Button>
                             </Box>

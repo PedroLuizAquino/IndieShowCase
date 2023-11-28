@@ -65,14 +65,12 @@ export const MenuDrawer = () => {
                         <Box display={'flex'}
                             key={index}
                             padding={2}
-                            component={Button}
-                            onClick={() => navigate(categorias.to)}
-                            color={'inherit'}
-                            size={'small'}
-                            style={{ textTransform: 'none' }}>
-                            <Typography >
+                            alignItems={'center'}
+                            justifyContent={'center'}
+                        >
+                            <Button variant="text" color="pedro" style={{ textTransform: 'none' }} size="large" onClick={() => navigate(categorias.to)} >
                                 {categorias.label}
-                            </Typography>
+                            </Button>
                         </Box>
                     ))}
                 </Box>

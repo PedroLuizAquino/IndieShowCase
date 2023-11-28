@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Box, Container, Paper, Typography, Button, Link, TextField } from '@mui/material';
+import { Box, Container, Paper, Typography, Button, Link, TextField, CircularProgress } from '@mui/material';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { StyledTextField } from '../../Themes';
+import { useState } from 'react';
 
 
 
@@ -14,6 +15,7 @@ import { StyledTextField } from '../../Themes';
 export const LoginUsuario = () => {
 
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false)
 
 
     const LoginUserFormSchema = z.object({
@@ -30,6 +32,7 @@ export const LoginUsuario = () => {
 
 
     const loginUser = (data: LoginFormData) => {
+        setIsLoading(true)
         axios
             .post('http://localhost:8000/usuarios/login', {
                 email: data.email,
@@ -37,12 +40,14 @@ export const LoginUsuario = () => {
             })
             .then((response) => {
                 //setMensagemErro(true);
+                setIsLoading(true)
                 if (response.status === 200) {
                     localStorage.setItem("token", response.data.token)
                     navigate('/');
                     window.location.reload();
                 }
             }).catch((error) => {
+                setIsLoading(true)
                 toast.error('email ou senha incorretos')
             });
 
@@ -89,6 +94,7 @@ export const LoginUsuario = () => {
                         label="Email"
                         {...register('email')}
                         helperText={errors.email?.message}
+                        disabled={isLoading}
                         error={!!errors.email?.message}
                         color='pedro'
                         type='email'
@@ -100,6 +106,7 @@ export const LoginUsuario = () => {
                         {...register('password')}
                         type='password'
                         helperText={errors.password?.message}
+                        disabled={isLoading}
                         error={!!errors.password?.message}
                         color='pedro'
                     />
@@ -119,6 +126,15 @@ export const LoginUsuario = () => {
                                 color="secondary"
                                 size='large'
                                 type='submit'
+                                endIcon={
+                                    isLoading ?
+                                        <CircularProgress
+                                            variant='indeterminate'
+                                            color='inherit'
+                                            size={20}
+                                        />
+                                        : undefined
+                                }
                             >Login</Button>
                         </Box>
                     </Box>
