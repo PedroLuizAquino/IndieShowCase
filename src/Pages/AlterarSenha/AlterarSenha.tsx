@@ -29,12 +29,10 @@ export const AlterarSenha = () => {
     const searchParams = new URLSearchParams(location.search);
     const token = searchParams.get('token');
 
-    console.log(token)
 
 
 
     const recuperaSenha = (data: RecuperarSenhaFormData) => {
-        console.log(data)
         axios
             .post(`http://localhost:8000/usuarios/nova-senha?token=${token}`, {
                 senha: data.password,

@@ -36,7 +36,6 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
 
 
 
-    console.log('postagem detalhada', postagem)
 
     return (
         <Box>

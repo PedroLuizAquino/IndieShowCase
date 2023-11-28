@@ -9,7 +9,6 @@ interface SelectCategoriaProps {
 
 
 const SelectCategoria: React.FC<SelectCategoriaProps> = ({ categorias, onCategoriaSelonecionado }) => {
-    console.log("categorias do selectCategorias", categorias)
     return (
         <Select
             placeholder='Categorias'

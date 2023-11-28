@@ -18,8 +18,6 @@ export const HomeCategoria = ({ categoria }: HomeCategoriaProps) => {
         axios
             .get<{ response: IPostagem[] }>(`http://localhost:8000/postagens/listar/${categoria.cat_id}`)
             .then(({ data }) => {
-                console.log("data", data.response);
-                console.log("data", data);
                 setListaPostagem(data.response);
             })
             .catch((error) => {

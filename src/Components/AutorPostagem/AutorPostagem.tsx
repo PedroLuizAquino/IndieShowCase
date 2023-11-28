@@ -33,9 +33,6 @@ export const AutorPostagem = ({ postagem }: AutorPostagemProps) => {
     }, []);
 
 
-    console.log('postagem detalhada', postagem)
-    console.log(`http://localhost:8000/${usuario?.usu_foto}`)
-
     return (
         <>
             <Avatar

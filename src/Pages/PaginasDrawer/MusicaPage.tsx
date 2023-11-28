@@ -21,8 +21,6 @@ export const MusicaPage = () => {
         axios
             .get<{ response: ICategorias[] }>(`http://localhost:8000/postagens/listarNome/Musica`)
             .then(({ data }) => {
-                console.log("data categoria", data.response);
-                console.log("data categoria", data);
                 setCategoria(data.response[0]);
             })
             .catch((error) => {

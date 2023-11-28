@@ -24,7 +24,6 @@ export const DetalhePostagens = () => {
 
 
     useEffect(() => {
-        console.log('pos_id:', pos_id);
         axios
             .get<{ response: IPostagem[] }>(`http://localhost:8000/postagens/${pos_id}/`)
             .then(({ data }) => {
@@ -39,7 +38,6 @@ export const DetalhePostagens = () => {
             });
 
     }, []);
-    console.log('postagem detalhada', postagem)
 
     // Faça algo com o ID (por exemplo, renderize os detalhes da postagem com base no ID)
     return postagem && (

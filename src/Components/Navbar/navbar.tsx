@@ -22,6 +22,7 @@ export const Navbar = () => {
         setToken(userToken);
     }, []);
 
+    console.log("Renderizou")
 
     return (
         <Box marginBottom={'100px'}>

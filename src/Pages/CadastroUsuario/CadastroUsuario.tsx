@@ -35,9 +35,6 @@ export const CadastroUsuario = () => {
 
 
     const createUser = (data: createUserFormData) => {
-        console.log(data.name)
-        console.log(data.email)
-        console.log(data.password)
         setIsLoading(true)
 
         axios

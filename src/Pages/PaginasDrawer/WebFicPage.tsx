@@ -21,8 +21,6 @@ export const WebFicPage = () => {
         axios
             .get<{ response: ICategorias[] }>(`http://localhost:8000/postagens/listarNome/Web`)
             .then(({ data }) => {
-                console.log("data categoria", data.response);
-                console.log("data categoria", data);
                 setCategoria(data.response[0]);
             })
             .catch((error) => {

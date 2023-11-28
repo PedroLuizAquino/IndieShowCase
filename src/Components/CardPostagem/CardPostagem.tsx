@@ -15,7 +15,6 @@ type CardPostagemProps = {
 
 export const CardPostagem = ({ postagem }: CardPostagemProps) => {
 
-    console.log(postagem)
     const navigate = useNavigate();
 
     const [usuario, setUsuario] = useState<IUsuario | null>(null);
