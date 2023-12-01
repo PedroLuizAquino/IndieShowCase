@@ -19,6 +19,13 @@ export interface IPostagem {
     pos_capa: string;
 }
 
+export interface IArquivo{
+    arq_id: number;
+    arq_nome: string;
+    arq_extensao: string;
+    pos_id: number;
+}
+
 
 export interface IUsuario {
     usu_id: number;
