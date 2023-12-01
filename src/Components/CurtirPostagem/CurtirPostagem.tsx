@@ -14,6 +14,8 @@ export const CurtirPostagem = ({ postagem }: CurtirPostagemProps) => {
   const [localGostei, setLocalGostei] = useState(postagem.pos_qtdGostei);
 
   const handleGostei = () => {
+    if (token) {
+
     axios
       .post(
         `http://localhost:8000/postagens/gostei/${postagem.pos_id}/`,
@@ -37,6 +39,7 @@ export const CurtirPostagem = ({ postagem }: CurtirPostagemProps) => {
       .catch((error) => {
         toast.error(error.message);
       });
+    }
   };
 
   return (
