@@ -20,12 +20,51 @@ import { CurtirPostagem } from "../../Components/CurtirPostagem/CurtirPostagem";
 
 export const DetalhePostagens = () => {
   const { pos_id } = useParams();
-
   const navigate = useNavigate();
-
   const [postagem, setPostagem] = useState<IPostagem | null>(null);
-
   const token = localStorage.getItem("token");
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/postagens/baixar/${pos_id}`, {
+        headers: {
+          //Authorization: `Bearer ${token}`, // Se necessário para autenticação
+        },
+      });
+
+      if (!response.ok) {
+        console.error('Erro ao baixar o arquivo:', response.statusText);
+        return;
+      }
+
+      const blob = await response.blob();
+
+      // Cria um URL para o Blob
+      const url = URL.createObjectURL(blob);
+      const arquivonome = response.headers.get('Content-Disposition')?.split('filename=')[1];
+      // Cria um link temporário
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = ''; // Substitua pelo nome desejado
+
+
+      // Adiciona o link ao DOM e simula um clique
+      document.body.appendChild(link);
+      link.click();
+
+      // Remove o link do DOM
+      document.body.removeChild(link);
+
+      // Libera recursos do Blob
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Erro na requisição de download:', error);
+    }
+  };
+
+
+
+
 
   useEffect(() => {
     axios
@@ -129,6 +168,9 @@ export const DetalhePostagens = () => {
                 gap={2}
                 paddingTop={2}
               >
+                  <Button onClick={handleDownload} variant="contained" color="secondary">
+                            Baixar
+                            </Button>
                 <CurtirPostagem postagem={postagem} />
               </Box>
             </Grid>
