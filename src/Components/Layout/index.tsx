@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Box, ThemeProvider } from '@mui/material';
 import { DefaultTheme } from '../../Themes';
-import { Navbar } from '../Navbar/Navbar';
+import { Navbar } from '../Navbar/navbar';
 
 
 

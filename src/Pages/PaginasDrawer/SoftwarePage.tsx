@@ -17,13 +17,13 @@ import { ICategorias } from "../../Interface";
 import { HomeCategoria } from "../../Components/HomeCategorias";
 import Pagina404 from "../Pagina404/Pagina404";
 
-export const IlustracaoPage = () => {
+export const SoftwarePage = () => {
   const [categoria, setCategoria] = useState<ICategorias | null>(null);
 
   useEffect(() => {
     axios
       .get<{ response: ICategorias[] }>(
-        `http://localhost:8000/postagens/listarNome/Ilustração`
+        `http://localhost:8000/postagens/listarNome/Software`
       )
       .then(({ data }) => {
         setCategoria(data.response[0]);

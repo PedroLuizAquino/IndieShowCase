@@ -20,7 +20,7 @@ export const QuadrinhosPage = () => {
     useEffect(() => {
         axios
             .get<{ response: ICategorias[] }>(`http://localhost:8000/postagens/listarNome/Quadrinhos`)
-            .then(({ data }) => {
+            .then(({ data }) => {   
                 setCategoria(data.response[0]);
             })
             .catch((error) => {
