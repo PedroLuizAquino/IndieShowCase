@@ -12,21 +12,13 @@ export const HomePage = () => {
 
 
     useEffect(() => {
-        // Tente obter os dados do cache
-        const cachedData = localStorage.getItem('cachedPostagens');
-        if (cachedData) {
-            setListaPostagem(JSON.parse(cachedData));
-        }
 
-        // Faça a requisição apenas se os dados não estiverem em cache ou se você quiser atualizar o cache
         axios
             .get<{ response: IPostagem[] }>('http://localhost:8000/postagens/')
             .then(({ data }) => {
                 console.log("data", data.response);
                 setListaPostagem(data.response);
 
-                // Atualize o cache
-                localStorage.setItem('cachedPostagens', JSON.stringify(data.response));
             })
             .catch((error) => {
                 console.error('Erro ao obter postagens:', error);

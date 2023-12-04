@@ -44,20 +44,20 @@ export const CardPostagem = ({ postagem }: CardPostagemProps) => {
   }, []);
 
   return (
-    <Box width={"345px"} padding={"10px"}>
+    <Box width={"350px"} padding={"10px"}>
       <Card>
         <CardActionArea
           onClick={() => navigate(`/postagem/${postagem.pos_id}`)}
         >
           <CardMedia
             component="img"
-            height="140px"
+            height="200px"
             image={
               postagem.pos_capa
                 ? `http://localhost:8000/${postagem.pos_capa}`
                 : logo
             }
-            sx={{ borderRadius: "5px", maxHeight: "140px" }}
+            sx={{ borderRadius: "5px", maxHeight: "200px" }}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
