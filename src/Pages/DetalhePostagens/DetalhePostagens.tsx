@@ -17,6 +17,7 @@ import { AutorPostagem } from "../../Components/AutorPostagem/AutorPostagem";
 import { ComentariosPostagem } from "../../Components/ComentariosPostagem/ComentariosPostagem";
 import { Comentar } from "../../Components/Comentar/Comentar";
 import { CurtirPostagem } from "../../Components/CurtirPostagem/CurtirPostagem";
+import { MediaPostagem } from "../../Components/MediaPostagem/MediaPostagem";
 
 export const DetalhePostagens = () => {
   const { pos_id } = useParams();
@@ -140,12 +141,7 @@ export const DetalhePostagens = () => {
             </Grid>
             <Grid item xs={12}>
               <Box display={"flex"} justifyContent={"center"}>
-                <br />
-                <br />
-                <Typography>"futuro espaço do arquivo"</Typography>
-                <br />
-                <br />
-                <br />
+                <MediaPostagem postagem={postagem} />
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -168,9 +164,9 @@ export const DetalhePostagens = () => {
                 gap={2}
                 paddingTop={2}
               >
-                  <Button onClick={handleDownload} variant="contained" color="secondary">
-                            Baixar
-                            </Button>
+                <Button onClick={handleDownload} variant="contained" color="secondary">
+                  Baixar
+                </Button>
                 <CurtirPostagem postagem={postagem} />
               </Box>
             </Grid>

@@ -19,10 +19,11 @@ export interface IPostagem {
     pos_capa: string;
 }
 
-export interface IArquivo{
+export interface IArquivo {
     arq_id: number;
     arq_nome: string;
     arq_extensao: string;
+    arq_caminho: string;
     pos_id: number;
 }
 
@@ -54,3 +55,4 @@ interface TokenPayload {
     usu_email: string;
     usu_foto: string;
 }
+
