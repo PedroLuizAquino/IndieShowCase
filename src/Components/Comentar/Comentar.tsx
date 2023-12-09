@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
 
 type ComentariosPostagemProps = {
   postagem: IPostagem;
@@ -16,12 +17,39 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
   //const [comentarios, setComentarios] = useState<IComentarios[]>([]);
 
   const navigate = useNavigate();
+  const [token, setToken] = useState<string | null>(null);
+  const [usuFoto, setUsuFoto] = useState<string | null>(null);
+  const [userID, setUserId] = useState<number | null>(null);
 
-  const token = localStorage.getItem("token");
-  if (token) {
-    const decode = jwtDecode(token);
-    console.log("token", decode);
-  }
+
+  useEffect(() => {
+    const userToken = localStorage.getItem('token');
+    setToken(userToken);
+
+    // Exemplo: obtendo informações do usuário ao fazer login
+    if (userToken) {
+      const tokenDecodificado = jwtDecode<{ usu_id: number, usu_foto: string }>(userToken);
+      const userID = tokenDecodificado?.usu_id;  // <-- Renomeie aqui
+      const userName = tokenDecodificado?.usu_foto;
+      // Suponha que você tenha um endpoint no seu backend para obter as informações do usuário
+      fetch(`http://localhost:8000/usuarios/${userID}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${userToken}`
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Dados recebidos no frontend:', data);
+          const userData = data.response[0];
+          setUsuFoto(userData.usu_foto);
+          setUserId(userData.usu_id);
+
+        })
+        .catch(error => console.error('Erro ao obter informações do usuário:', error));
+      console.log(usuFoto)
+    }
+  }, []);
 
   const ComentarFormSchema = z.object({
     texto: z.string().nonempty("campo obrigatorio"),
@@ -62,7 +90,10 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
   return (
     <Box component="form" onSubmit={handleSubmit(ComentarPostagem)}>
       <Box display={"flex"} flexDirection={"row"} gap={2}>
-        <Avatar />
+        <Avatar
+          src={`http://localhost:8000/${usuFoto}`}
+
+        />
         <TextField
           label="Comentar"
           {...register("texto")}

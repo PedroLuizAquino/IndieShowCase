@@ -47,10 +47,17 @@ export const CadastroUsuario = () => {
                 //setMensagemErro(true);
                 setIsLoading(false)
                 toast.success('Usuario Cadastrado')
+                setIsLoading(false)
                 navigate('/login');
             }).catch((error) => {
                 setIsLoading(false)
-                toast.error(error.message)
+                if (error.response.status === 409) {
+                    toast.error('Usuario já cadastrado')
+                } else {
+                    toast.error('Falha ao cadastrar ')
+                }
+                setIsLoading(false)
+
             });
 
     }
