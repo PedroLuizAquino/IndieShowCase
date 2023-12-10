@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IArquivo, IPostagem } from "../../Interface";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 
 
@@ -40,7 +41,7 @@ export const MediaPostagem = ({ postagem }: MediaPostageProps) => {
         } else if (extensao === 'mp3' || extensao === 'ogg' || extensao === 'wav' || extensao === 'm4a') {
             return <audio controls src={`http://localhost:8000/${arquivo.arq_caminho}`} />;
         } else {
-            return <p>Formato de arquivo não suportado</p>;
+            return <p>Formato de arquivo não suportado para reprodução no navegado</p>;
         }
     };
 
@@ -48,10 +49,10 @@ export const MediaPostagem = ({ postagem }: MediaPostageProps) => {
     return (
         <div>
             {arquivo && (
-                <div>
+                <Box>
                     {renderizarTag(arquivo)}
                     {/* <p>{arquivo.}</p> */}
-                </div>
+                </Box>
             )}
         </div>
     );

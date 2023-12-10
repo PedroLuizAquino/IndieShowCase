@@ -22,6 +22,7 @@ export const JogosPage = () => {
             .get<{ response: ICategorias[] }>(`http://localhost:8000/postagens/listarNome/Jogos`)
             .then(({ data }) => {
                 setCategoria(data.response[0]);
+                console.log(categoria)
             })
             .catch((error) => {
                 console.error('Erro ao obter categorias:', error);

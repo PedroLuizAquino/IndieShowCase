@@ -47,8 +47,9 @@ export const LoginUsuario = () => {
       })
       .then((response) => {
         //setMensagemErro(true);
-        setIsLoading(true);
+        setIsLoading(false);
         if (response.status === 200) {
+          setIsLoading(false)
           localStorage.setItem("token", response.data.token);
           navigate("/");
           window.location.reload();
