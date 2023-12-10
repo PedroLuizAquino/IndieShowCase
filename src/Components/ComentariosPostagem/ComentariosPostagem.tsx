@@ -30,7 +30,7 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
   }, []);
 
   return (
-    <Box height={"420px"} maxHeight={"600px"} marginTop={5} overflow={"auto"}>
+    <Box height={"auto"} maxHeight={"auto"} marginTop={5} overflow={"auto"}>
       {comentarios.map((comentarios, index) => (
         <Box
           key={index}
