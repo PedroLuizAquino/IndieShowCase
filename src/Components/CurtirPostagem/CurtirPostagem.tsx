@@ -16,29 +16,29 @@ export const CurtirPostagem = ({ postagem }: CurtirPostagemProps) => {
   const handleGostei = () => {
     if (token) {
 
-      axios
-        .post(
-          `http://localhost:8000/postagens/gostei/${postagem.pos_id}/`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((response) => {
-          setLocalGostei(
-            (prevGostei) => prevGostei + (response.status === 201 ? 1 : -1)
-          );
-          if (response.status === 201) {
-            toast.success("Postagem marcada como gostei");
-          } else if (response.status === 200) {
-            toast.success("Postagem removida do gostei");
-          }
-        })
-        .catch((error) => {
-          toast.error(error.message);
-        });
+    axios
+      .post(
+        `http://localhost:8000/postagens/gostei/${postagem.pos_id}/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setLocalGostei(
+          (prevGostei) => prevGostei + (response.status === 201 ? 1 : -1)
+        );
+        if (response.status === 201) {
+          toast.success("Postagem marcada como gostei");
+        } else if (response.status === 200) {
+          toast.success("Postagem removida do gostei");
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
     }
   };
 

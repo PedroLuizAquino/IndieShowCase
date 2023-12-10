@@ -84,14 +84,13 @@ export const DetalhePostagens = () => {
       });
   }, []);
 
-  // Faça algo com o ID (por exemplo, renderize os detalhes da postagem com base no ID)
   return (
     postagem && (
       <Container maxWidth={"lg"}>
         <Box
           margin={6}
           maxWidth={3000}
-          height={1200}
+          height={"auto"}
           display={"flex"}
           gap={1}
           flexDirection={"column"}
