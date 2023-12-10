@@ -5,7 +5,7 @@ import logo from '../../assets/logo2.png'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ICategorias } from "../../Interface";
-import { HomeCategoria } from "../../Components/HomeCategorias";
+import { HomeCategoria } from "../../Components/HomeCategorias/HomeCategorias";
 import Pagina404 from "../Pagina404/Pagina404";
 
 
@@ -20,7 +20,7 @@ export const QuadrinhosPage = () => {
     useEffect(() => {
         axios
             .get<{ response: ICategorias[] }>(`http://localhost:8000/postagens/listarNome/Quadrinhos`)
-            .then(({ data }) => {   
+            .then(({ data }) => {
                 setCategoria(data.response[0]);
             })
             .catch((error) => {

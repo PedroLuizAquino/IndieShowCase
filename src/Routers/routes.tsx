@@ -15,6 +15,7 @@ import { AnimacaoPage } from "../Pages/PaginasDrawer/AnimacaoPage";
 import { MusicaPage } from "../Pages/PaginasDrawer/MusicaPage";
 import { WebFicPage } from "../Pages/PaginasDrawer/WebFicPage";
 import { SoftwarePage } from "../Pages/PaginasDrawer/SoftwarePage";
+import { HomePesquisa } from "../Components/HomePesquisa/HomePesquisa";
 
 export default function AppRouter() {
   const userToken = localStorage.getItem("token"); // exemplo de onde você pode armazenar o token
@@ -43,6 +44,7 @@ export default function AppRouter() {
           <Route path="/musica" element={<MusicaPage />} />
           <Route path="/webficiton" element={<WebFicPage />} />
           <Route path="/software" element={<SoftwarePage />} />
+          <Route path="/query/:query" element={<HomePesquisa />} />
         </Route>
       </Routes>
     </Router>
