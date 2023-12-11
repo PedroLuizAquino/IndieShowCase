@@ -107,7 +107,7 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
       </Box>
       <Box display={"flex"} justifyContent={"end"} paddingTop={2}>
         <Button color="secondary" variant="contained" type="submit">
-          Pulbicar
+          Comentar
         </Button>
       </Box>
     </Box>
