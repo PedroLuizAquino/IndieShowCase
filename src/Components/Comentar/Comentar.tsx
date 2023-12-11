@@ -58,6 +58,7 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ComentarFormData>({
     resolver: zodResolver(ComentarFormSchema),
@@ -78,10 +79,11 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
       )
       .then((response) => {
         //setMensagemErro(true);
-        toast.success("Comentario enviado");
+        //toast.success("Comentario enviado");
         console.log("comentarios criado ", response.data.postagemcriada)
         //window.location.reload()
         eventBus.emit('novoComentario', response.data.postagemcriada);
+        reset();
       })
       .catch((error) => {
         toast.error("Erro ao Comentar");
