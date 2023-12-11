@@ -28,7 +28,6 @@ export const SearchBar = () => {
     });
 
     const PesquisarPostagem = (data: ComentarFormData) => {
-        console.log('query da pesquisa', data.query)
         navigate(`/query/${data.query}`);
     };
 

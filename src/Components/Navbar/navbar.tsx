@@ -37,7 +37,6 @@ export const Navbar = () => {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Dados recebidos no frontend:', data);
           const userData = data.response[0];
           setUserName(userData.usu_nome);
           setUserId(userData.usu_id);
