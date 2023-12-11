@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
+import eventBus from "../../EventBus/eventBus";
 
 type ComentariosPostagemProps = {
   postagem: IPostagem;
@@ -50,7 +51,7 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
   }, []);
 
   const ComentarFormSchema = z.object({
-    texto: z.string().nonempty("campo obrigatorio"),
+    com_texto: z.string().nonempty("campo obrigatorio"),
   });
   type ComentarFormData = z.infer<typeof ComentarFormSchema>;
 
@@ -67,7 +68,7 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
       .post(
         `http://localhost:8000/postagens/comentar/${postagem.pos_id}/`,
         {
-          texto: data.texto,
+          com_texto: data.com_texto,
         },
         {
           headers: {
@@ -78,7 +79,9 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
       .then((response) => {
         //setMensagemErro(true);
         toast.success("Comentario enviado");
-        window.location.reload()
+        console.log("comentarios criado ", response.data.postagemcriada)
+        //window.location.reload()
+        eventBus.emit('novoComentario', response.data.postagemcriada);
       })
       .catch((error) => {
         toast.error("Erro ao Comentar");
@@ -94,7 +97,7 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
         />
         <TextField
           label="Comentar"
-          {...register("texto")}
+          {...register("com_texto")}
           fullWidth
           variant="filled"
           color="pedro"

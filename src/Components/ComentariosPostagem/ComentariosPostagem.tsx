@@ -3,6 +3,7 @@ import { IComentarios, IPostagem, IUsuario } from "../../Interface";
 import axios from "axios";
 import { Avatar, Box, Typography } from "@mui/material";
 import { AutorComentario } from "../AutorComentario/AutorComentario";
+import eventBus from "../../EventBus/eventBus";
 
 type ComentariosPostagemProps = {
   postagem: IPostagem;
@@ -27,6 +28,18 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
           console.log("Status do servidor:", error.response.status);
         }
       });
+
+    const listener = (novoComentario: any) => {
+      // Atualize os comentários quando um novo comentário for criado
+      setComentarios((comentariosAntigos) => [...comentariosAntigos, novoComentario]);
+    };
+
+    eventBus.on('novoComentario', listener);
+
+    // Certifique-se de remover o ouvinte quando o componente for desmontado
+    return () => {
+      eventBus.removeListener('novoComentario', listener);
+    };
   }, [postagem.pos_id]);
 
   return (
