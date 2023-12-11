@@ -60,10 +60,10 @@ export const CardPostagem = ({ postagem }: CardPostagemProps) => {
             sx={{ borderRadius: "5px", maxHeight: "200px" }}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h5" component="div" overflow={'hidden'} whiteSpace={'nowrap'} textOverflow={'ellipsis'}>
               {postagem.pos_nome}
             </Typography>
-            <Typography variant="body2" color={"text.secondary"}>
+            <Typography variant="body2" color={"text.secondary"} overflow={'hidden'} whiteSpace={'nowrap'} textOverflow={'ellipsis'}>
               {postagem.pos_descricao}
             </Typography>
           </CardContent>
