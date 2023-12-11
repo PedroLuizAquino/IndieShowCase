@@ -15,12 +15,10 @@ export const HomeCategoria = ({ categoria }: HomeCategoriaProps) => {
 
 
     useEffect(() => {
-        console.log('categoria', categoria)
         axios
             .get<{ response: IPostagem[] }>(`http://localhost:8000/postagens/listar/${categoria?.cat_id}`)
             .then(({ data }) => {
                 setListaPostagem(data.response);
-                console.log(listaPostagem)
             })
             .catch((error) => {
                 console.error('Erro ao obter categorias:', error);

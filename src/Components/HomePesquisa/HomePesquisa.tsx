@@ -21,7 +21,6 @@ export const HomePesquisa = () => {
             .get<{ response: IPostagem[] }>(`http://localhost:8000/postagens/procurar/${query}`)
             .then(({ data }) => {
                 setListaPostagem(data.response);
-                console.log(listaPostagem)
             })
             .catch((error) => {
                 console.error('Erro ao obter categorias:', error);

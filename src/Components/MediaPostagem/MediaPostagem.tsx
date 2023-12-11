@@ -17,9 +17,7 @@ export const MediaPostagem = ({ postagem }: MediaPostageProps) => {
         axios
             .get<{ response: IArquivo[] }>(`http://localhost:8000/postagens/arquivos/${postagem.pos_id}/`)
             .then(({ data }) => {
-                console.log("data", data.response);
                 setArquivo(data.response[0]);
-                console.log(arquivo)
             })
             .catch((error) => {
                 console.error('Erro ao obter postagens:', error);
@@ -30,10 +28,8 @@ export const MediaPostagem = ({ postagem }: MediaPostageProps) => {
         if (!arquivo || !arquivo.arq_caminho) {
             return <p>Arquivo inválido</p>;
         }
-        console.log('arquivo', arquivo)
         const extensao = arquivo.arq_caminho.split('.').pop()?.toLocaleString();
 
-        console.log('extensão', extensao)
         if (extensao === 'jpg' || extensao === 'jpeg' || extensao === 'png') {
             return <img src={`http://localhost:8000/${arquivo.arq_caminho}`} alt="Imagem" />;
         } else if (extensao === 'mp4' || extensao === 'webm' || extensao === 'ogg') {

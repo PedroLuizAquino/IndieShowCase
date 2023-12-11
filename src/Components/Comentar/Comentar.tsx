@@ -40,13 +40,11 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Dados recebidos no frontend:', data);
           const userData = data.response[0];
           setUsuFoto(userData.usu_foto);
 
         })
         .catch(error => console.error('Erro ao obter informações do usuário:', error));
-      console.log(usuFoto)
     }
   }, []);
 
