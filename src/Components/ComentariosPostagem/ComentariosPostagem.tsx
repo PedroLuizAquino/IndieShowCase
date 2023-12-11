@@ -27,7 +27,7 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
           console.log("Status do servidor:", error.response.status);
         }
       });
-  }, []);
+  }, [postagem.pos_id]);
 
   return (
     <Box height={"auto"} maxHeight={"auto"} marginTop={5} overflow={"auto"}>
@@ -39,15 +39,6 @@ export const ComentariosPostagem = ({ postagem }: ComentariosPostagemProps) => {
           gap={2}
           paddingBottom={4}
         >
-          {/* <Avatar />
-                    <Box display={'flex'} flexDirection={'column'}>
-                        <Typography>
-                            nome do usuario que comentou
-                        </Typography>
-                        <Typography>
-                            {comentarios.com_texto}
-                        </Typography>
-                    </Box> */}
           <AutorComentario comentario={comentarios} />
         </Box>
       ))}

@@ -19,7 +19,6 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
   const navigate = useNavigate();
   const [token, setToken] = useState<string | null>(null);
   const [usuFoto, setUsuFoto] = useState<string | null>(null);
-  const [userID, setUserId] = useState<number | null>(null);
 
 
   useEffect(() => {
@@ -43,7 +42,6 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
           console.log('Dados recebidos no frontend:', data);
           const userData = data.response[0];
           setUsuFoto(userData.usu_foto);
-          setUserId(userData.usu_id);
 
         })
         .catch(error => console.error('Erro ao obter informações do usuário:', error));
@@ -80,7 +78,7 @@ export const Comentar = ({ postagem }: ComentariosPostagemProps) => {
       .then((response) => {
         //setMensagemErro(true);
         toast.success("Comentario enviado");
-        window.location.reload();
+        window.location.reload()
       })
       .catch((error) => {
         toast.error("Erro ao Comentar");

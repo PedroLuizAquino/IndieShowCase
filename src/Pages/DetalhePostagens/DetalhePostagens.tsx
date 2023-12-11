@@ -103,13 +103,6 @@ export const DetalhePostagens = () => {
         >
           <Grid container spacing={5}>
             <Grid item xs={8} sm={4}>
-              {/* <Box>
-                            <img
-                                //alt={postagem?.pos_capa ? `http://localhost:8000/${postagem?.pos_capa}` : logo}
-                                src={postagem?.pos_capa ? `http://localhost:8000/${postagem?.pos_capa}` : logo}
-                                alt={`Imagem da postagem ${postagem?.pos_id}`}
-                            />
-                        </Box> */}
               <CardMedia
                 component="img"
                 height="140"
