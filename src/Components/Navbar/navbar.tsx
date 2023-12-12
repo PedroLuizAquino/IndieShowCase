@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo2.png";
-import { Drawer, TextField } from "@mui/material";
+import { Avatar, Drawer, TextField } from "@mui/material";
 import { MenuDrawer } from "../MenuDrawer";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ export const Navbar = () => {
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [userID, setUserId] = useState<number | null>(null);
+  const [usuFoto, setUsuFoto] = useState<string | null>(null);
 
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export const Navbar = () => {
 
     // Exemplo: obtendo informações do usuário ao fazer login
     if (userToken) {
-      const tokenDecodificado = jwtDecode<{ usu_id: number, usu_nome: string }>(userToken);
+      const tokenDecodificado = jwtDecode<{ usu_id: number, usu_nome: string, usu_foto: string }>(userToken);
       const userID = tokenDecodificado?.usu_id;  // <-- Renomeie aqui
       const userName = tokenDecodificado?.usu_nome;
       // Suponha que você tenha um endpoint no seu backend para obter as informações do usuário
@@ -40,6 +41,7 @@ export const Navbar = () => {
           const userData = data.response[0];
           setUserName(userData.usu_nome);
           setUserId(userData.usu_id);
+          setUsuFoto(userData.usu_foto)
 
         })
         .catch(error => console.error('Erro ao obter informações do usuário:', error));
@@ -61,6 +63,9 @@ export const Navbar = () => {
           </Box>
           {token ? (
             <Box gap={1} display={'flex'}>
+              <Avatar
+                src={`http://localhost:8000/${usuFoto}`}
+              />
               <Button color='pedro' variant='text' onClick={() => navigate(`/perfil/${userID}`)}> {userName}  </Button>
               <Button color='pedro' variant='text' onClick={() => navigate('/criarPostagem')}>Publicar</Button>
               <Button variant='text' color='pedro' onClick={() => {

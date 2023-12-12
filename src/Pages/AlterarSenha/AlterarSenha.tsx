@@ -18,6 +18,9 @@ export const AlterarSenha = () => {
             .min(8, 'A senha prescisa de no mínimo 8 caracteres'),
         confirmPassword: z.string().nonempty('campo obrigatorio')
 
+    }).refine((fields) => fields.password === fields.confirmPassword, {
+        path: ['confirmPassword'],
+        message: 'As Senhas prescisam ser iguais'
     })
     type RecuperarSenhaFormData = z.infer<typeof ForgotPassowrdUserFormSchema>
 
