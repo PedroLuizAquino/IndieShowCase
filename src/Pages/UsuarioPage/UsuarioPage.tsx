@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IUsuario } from "../../Interface";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Container, Paper, Grid, CardMedia, Typography } from "@mui/material";
+import { Box, Container, Paper, Grid, CardMedia, Typography, Button } from "@mui/material";
 import { ImagemUsuario } from "../../Components/ImagemUsuario/ImagemUsuario";
 
 
@@ -74,10 +74,18 @@ export const UsuarioPage = () => {
                             <ImagemUsuario />
                         </Box>
                     </Grid>
-                    <Grid item xs={8} sm={4}>
+                    <Grid item xs={8} >
 
-                        {/* {Alterar Senha do usuario} */}
-
+                        <Box display={'flex'} justifyContent={'end'} paddingRight={'5px'}>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                size='large'
+                                onClick={() => navigate(`/editarSenha/${usu_id}`)}
+                            >
+                                Alterar Senha
+                            </Button>
+                        </Box>
                     </Grid>
                 </Grid>
             </Box>
