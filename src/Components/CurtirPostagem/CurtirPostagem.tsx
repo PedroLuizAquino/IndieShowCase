@@ -11,7 +11,7 @@ type CurtirPostagemProps = {
 
 export const CurtirPostagem = ({ postagem }: CurtirPostagemProps) => {
   const token = localStorage.getItem("token");
-  const [localGostei, setLocalGostei] = useState(postagem.pos_qtdGostei);
+  const [localGostei, setLocalGostei] = useState(postagem.pos_qtdgostei);
 
   const handleGostei = () => {
     if (token) {
