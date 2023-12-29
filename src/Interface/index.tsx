@@ -11,7 +11,7 @@ export interface IPostagem {
     pos_descricao: string;
     pos_ativo: boolean;
     pos_tags: string;
-    pos_qtdGostei: number;
+    pos_qtdgostei: number;
     pos_data: Date;
     usu_id: number;
     cat_id: number;
@@ -33,8 +33,8 @@ export interface IUsuario {
     usu_nome: string;
     usu_email: string;
     usu_senha: string;
-    usu_totalPublicacao: string;
-    usu_totalFavorito: string;
+    usu_totalpublicacao: string;
+    usu_totalfavorito: string;
     usu_status: string;
     usu_admin: string;
     usu_datacriado: string;
